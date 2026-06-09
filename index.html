@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <title>Nathaniel Ponce | System Administrator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="is-loading">
+    <div id="page-loader">
+      <img src="images/logo.png" alt="Nathaniel Ponce Logo" />
+    </div>
+
+    <section id="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div id="hero-overlay"></div>
+      <div id="site-logo" href="#hero" aria-label="Nathaniel Ponce Home">
+        <img src="images/logo.png" alt="Nathaniel Ponce Logo" />
+      </div>
+
+      <div id="hero-content">
+        <p id="hero-eyebrow">
+          USC CS Student &amp; Sysadmin
+          <span>Served from Ubuntu 24.04.4 LTS</span>
+        </p>
+
+        <h1 id="hero-name">Nathaniel Ryan <span>Ponce</span></h1>
+
+        <p id="hero-role">
+          <strong>System Administrator</strong> · Computer Science
+        </p>
+
+        <p id="hero-tagline">
+          Building resilient systems and clean software — from bare-metal
+          servers to full-stack web. Currently studying at USC while keeping the
+          infrastructure running and the servers humming.
+        </p>
+
+        <div id="hero-buttons">
+          <a href="#projects" class="hero-btn btn-primary">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="1"
+                y="1"
+                width="5"
+                height="5"
+                rx="1"
+                fill="currentColor"
+              />
+              <rect
+                x="8"
+                y="1"
+                width="5"
+                height="5"
+                rx="1"
+                fill="currentColor"
+              />
+              <rect
+                x="1"
+                y="8"
+                width="5"
+                height="5"
+                rx="1"
+                fill="currentColor"
+              />
+              <rect
+                x="8"
+                y="8"
+                width="5"
+                height="5"
+                rx="1"
+                fill="currentColor"
+              />
+            </svg>
+            Projects (Work in Progress...)
+          </a>
+
+          <a
+            href="https://github.com/nateponds"
+            class="hero-btn btn-secondary"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482
+            0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462
+            -.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832
+            .092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683
+            -.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0
+            012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592
+            1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012
+            2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+              />
+            </svg>
+            GitHub
+          </a>
+
+          <a href="#contact" class="hero-btn btn-secondary">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="1"
+                y="3"
+                width="12"
+                height="9"
+                rx="1.5"
+                stroke="currentColor"
+                stroke-width="1.2"
+              />
+              <path
+                d="M1 4.5L7 8.5L13 4.5"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+              />
+            </svg>
+            Contact Me
+          </a>
+        </div>
+      </div>
+
+      <!-- PS4 symbol easter egg -->
+      <div id="hero-symbols" aria-hidden="true">
+        <span class="ps-sym sym-t" title="Triangle">△</span>
+        <span class="ps-sym sym-o" title="Circle">○</span>
+        <span class="ps-sym sym-x" title="Cross">✕</span>
+        <span class="ps-sym sym-s" title="Square">□</span>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div id="hero-scroll" aria-hidden="true">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
