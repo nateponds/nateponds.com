@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          ROOT="/var/www/nateponds.com"
+          ROOT="/mnt/Storage2_New/website-hosting/nateponds-portfolio"
           RELEASE="$ROOT/releases/${GITHUB_SHA}"
 
           mkdir -p "$RELEASE"
