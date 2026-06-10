@@ -21,7 +21,7 @@ jobs:
           test -f index.html
           test -f css/style.css
           test -f js/script.js
-          test -f images/logo.png
+          test -f assets/logo.png
 
       - name: Deploy to Apache web root
         run: |
