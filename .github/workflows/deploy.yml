@@ -28,17 +28,10 @@ jobs:
           set -euo pipefail
 
           ROOT="/mnt/Storage2_New/website-hosting/nateponds-portfolio"
-          RELEASE="$ROOT/releases/${GITHUB_SHA}"
-
-          mkdir -p "$RELEASE"
 
           rsync -az --delete \
             --exclude ".git/" \
             --exclude ".github/" \
-            ./ "$RELEASE/"
+            ./ "$ROOT/"
 
-          chmod -R u=rwX,go=rX "$RELEASE"
-
-          ln -sfn "$RELEASE" "$ROOT/current"
-
-          ls -1dt "$ROOT/releases"/* | tail -n +6 | xargs -r rm -rf
+          chmod -R u=rwX,go=rX "$ROOT"
