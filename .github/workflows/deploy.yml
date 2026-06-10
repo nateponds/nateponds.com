@@ -1,0 +1,44 @@
+name: Deploy nateponds.com to Ubuntu Apache
+
+on:
+  push:
+    branches: ["main"]
+
+concurrency:
+  group: nateponds
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, linux]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify static website structure
+        run: |
+          test -f index.html
+          test -f css/style.css
+          test -f js/script.js
+          test -f images/logo.png
+
+      - name: Deploy to Apache web root
+        run: |
+          set -euo pipefail
+
+          ROOT="/var/www/nateponds.com"
+          RELEASE="$ROOT/releases/${GITHUB_SHA}"
+
+          mkdir -p "$RELEASE"
+
+          rsync -az --delete \
+            --exclude ".git/" \
+            --exclude ".github/" \
+            ./ "$RELEASE/"
+
+          chmod -R u=rwX,go=rX "$RELEASE"
+
+          ln -sfn "$RELEASE" "$ROOT/current"
+
+          ls -1dt "$ROOT/releases"/* | tail -n +6 | xargs -r rm -rf
