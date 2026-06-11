@@ -190,6 +190,7 @@
   requestAnimationFrame(frame);
 })();
 
+// PAGE LOADING SCREEN
 window.addEventListener("load", () => {
   const loader = document.getElementById("page-loader");
 
@@ -201,5 +202,188 @@ window.addEventListener("load", () => {
       document.body.classList.add("page-ready");
       loader.remove();
     }, 650);
-  }, 1200);
+  }, 800);
 });
+
+// NAV GLASS EFFECT AFTER SCROLLING FROM HERO
+const nav = document.querySelector("nav");
+const hero = document.querySelector("#hero");
+
+if (nav && hero) {
+  const navObserver = new IntersectionObserver(
+    ([entry]) => {
+      nav.classList.toggle("is-scrolled", !entry.isIntersecting);
+    },
+    {
+      threshold: 0,
+      rootMargin: "-80px 0px 0px 0px",
+    },
+  );
+
+  navObserver.observe(hero);
+}
+
+/* ─────────────────────────────────────────────
+   ABOUT TERMINAL TYPING EFFECT
+───────────────────────────────────────────── */
+
+function initAboutTerminal() {
+  const terminal = document.querySelector("#about-terminal-output");
+  const aboutSection = document.querySelector("#about");
+
+  if (!terminal || !aboutSection) return;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  // WHERE TO EDIT THE TERMINAL SCRIPT TYPING CONTENT
+  const terminalScript = [
+    {
+      command: "whoami",
+      output: "nathaniel / cs-student / sysadmin",
+    },
+    {
+      command: "current_focus",
+      output: "learning by building real systems, not just reading about them",
+    },
+    {
+      command: "stack",
+      tags: ["Linux", "HTML", "CSS", "JavaScript", "Git", "Apache"],
+    },
+  ];
+
+  let hasPlayed = false;
+
+  function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function typeText(element, text, speed = 24) {
+    element.classList.add("terminal-caret");
+
+    for (const character of text) {
+      element.append(character);
+      await wait(speed);
+    }
+
+    element.classList.remove("terminal-caret");
+  }
+
+  function createCommandLine() {
+    const line = document.createElement("p");
+    line.className = "terminal-line";
+
+    const prompt = document.createElement("span");
+    prompt.textContent = "$";
+
+    line.append(prompt, " ");
+
+    terminal.appendChild(line);
+
+    return line;
+  }
+
+  function createOutputLine() {
+    const output = document.createElement("p");
+    output.className = "terminal-output";
+
+    terminal.appendChild(output);
+
+    return output;
+  }
+
+  async function renderTags(tags) {
+    const tagContainer = document.createElement("div");
+    tagContainer.className = "terminal-tags";
+
+    terminal.appendChild(tagContainer);
+
+    for (const tag of tags) {
+      const tagElement = document.createElement("span");
+      tagContainer.appendChild(tagElement);
+
+      tagElement.classList.add("is-visible");
+      await typeText(tagElement, tag, 18);
+      await wait(90);
+    }
+  }
+
+  async function playTerminal() {
+    if (hasPlayed) return;
+
+    hasPlayed = true;
+    terminal.innerHTML = "";
+
+    if (prefersReducedMotion) {
+      terminalScript.forEach((entry) => {
+        const commandLine = createCommandLine();
+        commandLine.append(entry.command);
+
+        if (entry.output) {
+          const outputLine = createOutputLine();
+          outputLine.textContent = entry.output;
+        }
+
+        if (entry.tags) {
+          const tagContainer = document.createElement("div");
+          tagContainer.className = "terminal-tags";
+
+          entry.tags.forEach((tag) => {
+            const tagElement = document.createElement("span");
+            tagElement.textContent = tag;
+            tagElement.classList.add("is-visible");
+            tagContainer.appendChild(tagElement);
+          });
+
+          terminal.appendChild(tagContainer);
+        }
+      });
+
+      return;
+    }
+
+    await wait(250);
+
+    for (const entry of terminalScript) {
+      const commandLine = createCommandLine();
+      await typeText(commandLine, entry.command, 32);
+      await wait(280);
+
+      if (entry.output) {
+        const outputLine = createOutputLine();
+        await typeText(outputLine, entry.output, 18);
+        await wait(420);
+      }
+
+      if (entry.tags) {
+        await renderTags(entry.tags);
+        await wait(420);
+      }
+    }
+  }
+
+  if ("IntersectionObserver" in window) {
+    const terminalObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          playTerminal();
+          terminalObserver.disconnect();
+        }
+      },
+      {
+        threshold: 0.35,
+      },
+    );
+
+    terminalObserver.observe(aboutSection);
+  } else {
+    playTerminal();
+  }
+}
+
+initAboutTerminal();
+
+/* ─────────────────────────────────────────────
+   END OF ABOUT TERMINAL TYPING EFFECT
+───────────────────────────────────────────── */
