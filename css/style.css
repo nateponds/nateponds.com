@@ -8,7 +8,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: default;
 }
 
 html,
@@ -63,6 +62,8 @@ html {
   background: #05060a;
   user-select: none;
   z-index: 1;
+
+  cursor: default;
 }
 
 #hero-canvas {
@@ -810,6 +811,114 @@ section {
   font-weight: 600;
 }
 
+/* ── STACK CAROUSEL ─────────────────────────────── */
+
+.stack-showcase {
+  margin-top: clamp(56px, 8vw, 92px);
+}
+
+.stack-showcase-header {
+  margin-bottom: 22px;
+}
+
+.stack-showcase-header h3 {
+  max-width: 620px;
+  color: #f0f0f4;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.stack-carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 18px 0;
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.stack-track {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  animation: stackScroll 50s linear infinite;
+  will-change: transform;
+}
+
+.stack-item {
+  flex: 0 0 auto;
+  width: 108px;
+  height: 108px;
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 22px;
+}
+
+.stack-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(126, 200, 227, 0.26);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(126, 200, 227, 0.1),
+      rgba(255, 255, 255, 0.035)
+    ),
+    rgba(5, 6, 10, 0.64);
+  cursor: pointer;
+}
+
+.stack-item img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  filter: brightness(0) invert(1)
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.18));
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+.stack-item span {
+  max-width: 100%;
+  text-align: center;
+  color: rgba(240, 240, 244, 0.68);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+@keyframes stackScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .about-focus-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1029,6 +1138,40 @@ section {
   .about-card p {
     font-size: 0.82rem;
     line-height: 1.65;
+  }
+
+  .stack-showcase {
+    margin-top: 48px;
+  }
+
+  .stack-showcase-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .stack-carousel {
+    padding: 14px 0;
+  }
+
+  .stack-track {
+    gap: 10px;
+    animation-duration: 40s;
+  }
+
+  .stack-item {
+    width: 88px;
+    height: 88px;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .stack-item img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .stack-item span {
+    font-size: 0.56rem;
+    letter-spacing: 0.04em;
   }
 }
 

@@ -249,10 +249,6 @@ function initAboutTerminal() {
       command: "current_focus",
       output: "learning by building real systems, not just reading about them",
     },
-    {
-      command: "stack",
-      tags: ["Linux", "HTML", "CSS", "JavaScript", "Git", "Apache"],
-    },
   ];
 
   let hasPlayed = false;
@@ -421,3 +417,118 @@ if (navToggle && primaryNav) {
     }
   });
 }
+
+/* ─────────────────────────────────────────────
+   STACK CAROUSEL
+───────────────────────────────────────────── */
+
+function initStackCarousel() {
+  const stackTrack = document.querySelector("#stack-track");
+
+  if (!stackTrack) return;
+
+  const stacks = [
+    // Server / infrastructure
+    {
+      name: "Server PC",
+      icon: "https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/server.svg",
+    },
+    {
+      name: "Cloudflare",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cloudflare.svg",
+    },
+    {
+      name: "Tailscale",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tailscale.svg",
+    },
+    {
+      name: "Apache",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/apache.svg",
+    },
+    {
+      name: "Nginx",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nginx.svg",
+    },
+    {
+      name: "Docker",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg",
+    },
+    {
+      name: "Ubuntu",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ubuntu.svg",
+    },
+    {
+      name: "Git",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/git.svg",
+    },
+    {
+      name: "GitHub",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg",
+    },
+
+    // School / programming
+    {
+      name: "C",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/c.svg",
+    },
+    {
+      name: "C++",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cplusplus.svg",
+    },
+    {
+      name: "C#",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/csharp.svg",
+    },
+    {
+      name: "HTML",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/html5.svg",
+    },
+    {
+      name: "CSS",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/css.svg",
+    },
+    {
+      name: "JavaScript",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg",
+    },
+    {
+      name: "PHP",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/php.svg",
+    },
+    {
+      name: "Node.js",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg",
+    },
+    {
+      name: "MySQL",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/mysql.svg",
+    },
+  ];
+
+  function createStackItem(stack) {
+    const item = document.createElement("article");
+    item.className = "stack-item";
+
+    const icon = document.createElement("img");
+    icon.src = stack.icon;
+    icon.alt = `${stack.name} logo`;
+    icon.loading = "lazy";
+
+    const label = document.createElement("span");
+    label.textContent = stack.name;
+
+    item.append(icon, label);
+
+    return item;
+  }
+
+  const repeatedStacks = [...stacks, ...stacks];
+
+  stackTrack.innerHTML = "";
+
+  repeatedStacks.forEach((stack) => {
+    stackTrack.appendChild(createStackItem(stack));
+  });
+}
+
+initStackCarousel();
