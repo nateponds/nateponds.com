@@ -5,6 +5,11 @@
   cursor: default;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
 html,
 body {
   height: 100%;
@@ -39,35 +44,6 @@ body {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-}
-
-/* ── HERO ────────────────────────────────────────── */
-#hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  min-height: 560px;
-  overflow: hidden;
-  background: #05060a;
-  user-select: none;
-}
-
-#hero-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-#hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(5, 6, 10, 0.75) 0%,
-    rgba(5, 6, 10, 0.35) 55%,
-    rgba(5, 6, 10, 0.58) 100%
-  );
 }
 
 /* ── NAV ──────────── */
@@ -107,7 +83,8 @@ nav {
   height: 64px;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 0 14px rgba(126, 200, 227, 0.34))
+  filter:
+    drop-shadow(0 0 14px rgba(126, 200, 227, 0.34))
     drop-shadow(0 10px 18px rgba(0, 0, 0, 0.42));
   transition:
     transform 0.2s ease,
@@ -117,7 +94,8 @@ nav {
 
 #site-logo:hover img {
   transform: rotate(-3deg) scale(1.04);
-  filter: drop-shadow(0 0 22px rgba(126, 200, 227, 0.5))
+  filter:
+    drop-shadow(0 0 22px rgba(126, 200, 227, 0.5))
     drop-shadow(0 12px 22px rgba(0, 0, 0, 0.5));
 }
 
@@ -496,20 +474,51 @@ body.page-ready #hero-scroll {
 
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 700px) {
+  nav {
+    top: 14px;
+    padding: 0 16px;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  #site-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  #site-logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .nav-link-container {
+    max-width: calc(100vw - 92px);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-link-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link-container ul {
+    width: max-content;
+  }
+
+  .nav-button {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
   #hero-buttons {
     flex-direction: column;
     align-items: center;
   }
+
   .hero-btn {
     width: 100%;
     justify-content: center;
-  }
-  #site-logo {
-    top: 20px;
-    left: 22px;
-  }
-  #site-logo img {
-    width: 48px;
-    height: 48px;
   }
 }
