@@ -45,7 +45,7 @@
       c[3] = vec3(0.910, 0.482, 0.941); /* □ magenta */
       c[4] = vec3(0.000, 0.588, 1.000); /* lightbar  */
 
-      for (int i = 0; i < 20; i++) {
+      for (int i = 0; i < 24; i++) {
         float fi    = float(i);
         float ci    = mod(fi, 5.0);
         float phase = fi * 1.1547 + t;

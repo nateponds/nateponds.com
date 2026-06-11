@@ -18,12 +18,25 @@
       <img src="assets/logo.png" alt="Nathaniel Ponce Logo" />
     </div>
 
-    <nav>
+    <nav aria-label="Primary navigation">
       <a id="site-logo" href="#hero" aria-label="Nathaniel Ponce Home">
         <img src="assets/logo.png" alt="Nathaniel Ponce Logo" />
       </a>
 
-      <div class="nav-link-container">
+      <button
+        id="nav-toggle"
+        class="nav-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-controls="primary-nav-links"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-link-container" id="primary-nav-links">
         <ul>
           <li><a class="nav-button" href="#hero">Home</a></li>
           <li><a class="nav-button" href="#about">About</a></li>
