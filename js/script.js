@@ -60,7 +60,7 @@
         );
 
         float len = 0.65 + 0.45 * sin(fi * 1.3  + t * 0.6);
-        float w   = 0.0045 + 0.002 * sin(fi * 2.7 + t * 0.8);
+        float w   = 0.004 + 0.002 * sin(fi * 2.7 + t * 0.8);
         float v   = streak(uv, origin, dir, w, len);
 
         vec3 hcol;
@@ -173,7 +173,7 @@
     const dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
 
-    const followSpeed = 10.0;
+    const followSpeed = 11.0;
     const ease = 1.0 - Math.exp(-followSpeed * dt);
 
     mouseX += (targetX - mouseX) * ease;
