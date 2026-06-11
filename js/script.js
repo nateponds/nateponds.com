@@ -387,5 +387,37 @@ function initAboutTerminal() {
 initAboutTerminal();
 
 /* ─────────────────────────────────────────────
-   END OF ABOUT TERMINAL TYPING EFFECT
+   MOBILE NAV TOGGLE
 ───────────────────────────────────────────── */
+
+const navToggle = document.querySelector("#nav-toggle");
+const primaryNav = document.querySelector("nav");
+const navLinks = document.querySelectorAll(".nav-button");
+
+if (navToggle && primaryNav) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = primaryNav.classList.toggle("menu-open");
+
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation menu" : "Open navigation menu",
+    );
+  });
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      primaryNav.classList.remove("menu-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open navigation menu");
+    });
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      primaryNav.classList.remove("menu-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open navigation menu");
+    }
+  });
+}
