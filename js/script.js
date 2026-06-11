@@ -45,7 +45,7 @@
       c[3] = vec3(0.910, 0.482, 0.941); /* □ magenta */
       c[4] = vec3(0.000, 0.588, 1.000); /* lightbar  */
 
-      for (int i = 0; i < 16; i++) {
+      for (int i = 0; i < 20; i++) {
         float fi    = float(i);
         float ci    = mod(fi, 5.0);
         float phase = fi * 1.1547 + t;
@@ -76,7 +76,7 @@
 
       /* Lightbar blue glow under cursor */
       float dist = length(uv - mouse);
-      col += vec3(0.0, 0.35, 0.9) * exp(-dist * dist * 4.5) * 0.22;
+      col += vec3(0.0, 0.35, 0.9) * exp(-dist * dist * 4.5) * 0.25;
 
       col = 1.0 - exp(-col * 2.5); /* tone-map */
       gl_FragColor = vec4(col, 1.0);
