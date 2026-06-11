@@ -205,7 +205,9 @@ window.addEventListener("load", () => {
   }, 800);
 });
 
-// NAV GLASS EFFECT AFTER SCROLLING FROM HERO
+// ────────────────────────────────────────────────
+// NAV GLASS EFFECT AFTER SCROLLING FROM HERO OwO
+// ────────────────────────────────────────────────
 const nav = document.querySelector("nav");
 const hero = document.querySelector("#hero");
 
@@ -216,7 +218,7 @@ if (nav && hero) {
     },
     {
       threshold: 0,
-      rootMargin: "-80px 0px 0px 0px",
+      rootMargin: "-150px 0px 0px 0px",
     },
   );
 
