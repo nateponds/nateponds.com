@@ -112,50 +112,81 @@
   const uTime = gl.getUniformLocation(prog, "u_time");
   const uMouse = gl.getUniformLocation(prog, "u_mouse");
 
-  let mx, my;
+  let mouseX = 0;
+  let mouseY = 0;
+  let targetX = 0;
+  let targetY = 0;
+  let lastTs = 0;
+
+  function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, v));
+  }
 
   function resize() {
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = canvas.offsetWidth * dpr;
-    canvas.height = canvas.offsetHeight * dpr;
+
+    const oldW = canvas.width || 1;
+    const oldH = canvas.height || 1;
+
+    const mouseNX = mouseX / oldW;
+    const mouseNY = mouseY / oldH;
+    const targetNX = targetX / oldW;
+    const targetNY = targetY / oldH;
+
+    canvas.width = Math.max(1, Math.floor(canvas.offsetWidth * dpr));
+    canvas.height = Math.max(1, Math.floor(canvas.offsetHeight * dpr));
+
     gl.viewport(0, 0, canvas.width, canvas.height);
-    mx = canvas.width / 2;
-    my = canvas.height / 2;
+
+    mouseX = mouseNX * canvas.width || canvas.width / 2;
+    mouseY = mouseNY * canvas.height || canvas.height / 2;
+    targetX = targetNX * canvas.width || canvas.width / 2;
+    targetY = targetNY * canvas.height || canvas.height / 2;
   }
+
   resize();
   window.addEventListener("resize", resize);
 
   const hero = document.getElementById("hero");
 
-  hero.addEventListener("mousemove", (e) => {
+  function updateTargetFromPointer(e) {
     const r = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
-    mx = (e.clientX - r.left) * dpr;
-    my = (e.clientY - r.top) * dpr;
+
+    targetX = clamp((e.clientX - r.left) * dpr, 0, canvas.width);
+    targetY = clamp((e.clientY - r.top) * dpr, 0, canvas.height);
+  }
+
+  hero.addEventListener("pointermove", updateTargetFromPointer, {
+    passive: true,
+  });
+  hero.addEventListener("pointerdown", updateTargetFromPointer, {
+    passive: true,
   });
 
-  hero.addEventListener(
-    "touchmove",
-    (e) => {
-      e.preventDefault();
-      const r = canvas.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      const t = e.touches[0];
-      mx = (t.clientX - r.left) * dpr;
-      my = (t.clientY - r.top) * dpr;
-    },
-    { passive: false },
-  );
-
   let start = null;
+
   function frame(ts) {
     if (!start) start = ts;
+    if (!lastTs) lastTs = ts;
+
+    const dt = Math.min(0.05, (ts - lastTs) / 1000);
+    lastTs = ts;
+
+    const followSpeed = 10.0;
+    const ease = 1.0 - Math.exp(-followSpeed * dt);
+
+    mouseX += (targetX - mouseX) * ease;
+    mouseY += (targetY - mouseY) * ease;
+
     gl.uniform2f(uRes, canvas.width, canvas.height);
     gl.uniform1f(uTime, (ts - start) / 1000);
-    gl.uniform2f(uMouse, mx, my);
+    gl.uniform2f(uMouse, mouseX, mouseY);
+
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     requestAnimationFrame(frame);
   }
+
   requestAnimationFrame(frame);
 })();
 
