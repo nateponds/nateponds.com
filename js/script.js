@@ -304,7 +304,7 @@ function initAboutTerminal() {
       tagContainer.appendChild(tagElement);
 
       tagElement.classList.add("is-visible");
-      await typeText(tagElement, tag, 18);
+      await typeText(tagElement, tag, 30);
       await wait(90);
     }
   }
@@ -347,12 +347,12 @@ function initAboutTerminal() {
 
     for (const entry of terminalScript) {
       const commandLine = createCommandLine();
-      await typeText(commandLine, entry.command, 32);
+      await typeText(commandLine, entry.command, 55);
       await wait(280);
 
       if (entry.output) {
         const outputLine = createOutputLine();
-        await typeText(outputLine, entry.output, 18);
+        await typeText(outputLine, entry.output, 34);
         await wait(420);
       }
 
