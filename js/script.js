@@ -247,7 +247,12 @@ function initAboutTerminal() {
     },
     {
       command: "current_focus",
-      output: "learning by building real systems, not just reading about them",
+      output: "learning by building real systems, not just studying about them",
+    },
+    {
+      command: "driven_motivation",
+      output:
+        "I am always eager to learn new technologies and adapt to changes",
     },
   ];
 

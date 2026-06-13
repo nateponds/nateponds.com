@@ -963,7 +963,7 @@ section {
 /* ── ABOUT TERMINAL TYPING EFFECT ───────────────── */
 
 #about-terminal-output {
-  min-height: 310px;
+  min-height: 355px;
 }
 
 .terminal-line,
