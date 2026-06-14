@@ -218,6 +218,8 @@
   line-height: 1;
 }
 
+/* STACK TAGS COLORS TO CHANGE */
+
 .stack-html {
   color: #ff8a65;
 }
@@ -260,6 +262,10 @@
 
 .stack-mongoose {
   color: #e06c75;
+}
+
+.stack-tailscale {
+  color: #242424;
 }
 
 .stack-default {

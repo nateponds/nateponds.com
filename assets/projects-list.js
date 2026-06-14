@@ -10,6 +10,7 @@ const projectStacks = [
   { name: "Node.js", className: "stack-node" },
   { name: "Express.js", className: "stack-express" },
   { name: "Mongoose", className: "stack-mongoose" },
+  { name: "Tailwind CSS", className: "stack-tailwind" },
 ];
 // set to red yellow green or blue for project status on the server
 const portfolioProjects = [
@@ -29,7 +30,7 @@ const portfolioProjects = [
     number: "02",
     name: "Swappr",
     description: "Insert description here.",
-    stacks: ["HTML", "CSS", "JS"],
+    stacks: ["HTML", "Tailwind CSS", "Node.js"],
     status: "green",
     statusLabel: "",
     url: "https://swappr.nateponds.com",
