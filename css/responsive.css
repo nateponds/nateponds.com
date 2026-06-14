@@ -194,13 +194,17 @@
 
   .project-visual,
   .project-card {
-    flex-basis: auto;
+    width: 100%;
+    max-width: 100%;
+    flex: 1 1 100%;
+    flex-basis: 100%;
     min-width: 0;
     min-height: 260px;
   }
 
   .project-visual {
     height: 260px;
+    min-width: 0;
     aspect-ratio: 16 / 11;
   }
 
@@ -212,6 +216,7 @@
   .project-card {
     min-height: 0;
     padding: 26px;
+    overflow-wrap: anywhere;
   }
 
   .project-card h3 {
@@ -221,6 +226,31 @@
   .project-card-footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .project-stack-tag,
+  .project-link {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .section-container {
+    width: min(100% - 24px, 1120px);
+  }
+
+  .project-card {
+    padding: 22px;
+  }
+
+  .project-stack-tags {
+    gap: 10px;
+  }
+
+  .project-link {
+    width: 100%;
+    padding-inline: 14px;
+    text-align: center;
   }
 }
 
