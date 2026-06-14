@@ -558,6 +558,24 @@ body.page-ready #hero-scroll {
   }
 }
 
+.projects-reveal-item {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  filter: blur(12px);
+  transition:
+    opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--projects-reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+.projects-reveal-item.projects-reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   #hero-eyebrow,
   #hero-name,
@@ -566,9 +584,13 @@ body.page-ready #hero-scroll {
   #hero-buttons,
   #hero-symbols,
   #hero-scroll,
-  .scroll-line {
+  .scroll-line,
+  .projects-reveal-item {
     animation: none;
     opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }
 

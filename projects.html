@@ -13,10 +13,15 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/projects-section.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
   </head>
   <body class="projects-page">
     <nav aria-label="Primary navigation">
-      <a id="site-logo" href="./index.html#hero" aria-label="Nathaniel Ponce Home">
+      <a
+        id="site-logo"
+        href="./index.html#hero"
+        aria-label="Nathaniel Ponce Home"
+      >
         <img src="assets/images/logo.png" alt="Nathaniel Ponce Logo" />
       </a>
 
@@ -37,17 +42,29 @@
         <ul>
           <li><a class="nav-button" href="./index.html#hero">Home</a></li>
           <li><a class="nav-button" href="./index.html#about">About</a></li>
-          <li><a class="nav-button" href="./index.html#projects">Projects</a></li>
+          <li>
+            <a class="nav-button" href="./index.html#projects">Projects</a>
+          </li>
           <li><a class="nav-button" href="./index.html#contact">Contact</a></li>
         </ul>
       </div>
     </nav>
 
     <main>
-      <section id="projects" class="projects-archive" aria-labelledby="projects-title">
+      <section
+        id="projects"
+        class="projects-archive"
+        aria-labelledby="projects-title"
+      >
         <div class="section-container">
           <div class="projects-heading">
-            <p class="section-kicker">Portfolio Archive</p>
+            <div class="projects-heading-topline">
+              <a class="projects-back-link" href="./index.html#projects">
+                <span aria-hidden="true">&larr;</span>
+                Go Back
+              </a>
+              <p class="section-kicker">Portfolio Archive</p>
+            </div>
             <h1 id="projects-title">All Projects</h1>
           </div>
 
