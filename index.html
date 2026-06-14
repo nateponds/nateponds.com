@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="icon" type="image/png" href="assets/images/logo.png" />
     <title>Nathaniel Ponce | System Administrator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,15 +12,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/projects-section.css" />
   </head>
   <body class="is-loading">
     <div id="page-loader">
-      <img src="assets/logo.png" alt="Nathaniel Ponce Logo" />
+      <img src="assets/images/logo.png" alt="Nathaniel Ponce Logo" />
     </div>
 
     <nav aria-label="Primary navigation">
       <a id="site-logo" href="#hero" aria-label="Nathaniel Ponce Home">
-        <img src="assets/logo.png" alt="Nathaniel Ponce Logo" />
+        <img src="assets/images/logo.png" alt="Nathaniel Ponce Logo" />
       </a>
 
       <button
@@ -186,7 +187,7 @@
 
     <main>
       <section id="about" aria-labelledby="about-title">
-        <div class="content-container about-container">
+        <div class="section-container">
           <p class="section-kicker">About / Background</p>
 
           <div class="about-grid">
@@ -297,8 +298,31 @@
           </div>
         </div>
       </section>
+
+      <section id="projects">
+        <div class="section-container">
+          <div class="projects-heading">
+            <p class="section-kicker">Featured Projects</p>
+            <h2>Hosted builds with sharp edges and practical systems.</h2>
+          </div>
+
+          <div
+            id="featured-projects-grid"
+            class="projects-list"
+            aria-label="Featured projects"
+          ></div>
+
+          <div class="projects-actions">
+            <a href="./projects.html" class="project-link projects-more-link">
+              View More Projects
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script src="js/script.js"></script>
+    <script src="assets/projects-list.js"></script>
+    <script src="js/projects-init.js"></script>
   </body>
 </html>

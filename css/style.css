@@ -584,11 +584,6 @@ section {
   scroll-margin-top: 90px;
 }
 
-.content-container {
-  width: min(1120px, calc(100% - clamp(36px, 8vw, 120px)));
-  margin: 0 auto;
-}
-
 /* ── ABOUT ME ──────────────────────────────────── */
 
 #about {
@@ -656,7 +651,9 @@ section {
   pointer-events: none;
 }
 
-.about-container {
+.section-container {
+  width: min(1120px, calc(100% - clamp(36px, 8vw, 120px)));
+  margin: 0 auto;
   position: relative;
   z-index: 1;
 }
@@ -1031,7 +1028,7 @@ section {
     padding: 88px 0 82px;
   }
 
-  .content-container {
+  .section-container {
     width: min(100% - 32px, 1120px);
   }
 
