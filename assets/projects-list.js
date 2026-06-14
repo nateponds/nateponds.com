@@ -1,3 +1,5 @@
+// REMEMBER WHEN ADDING NEW STACKS PUT THEM HERE FOR
+// CONFIGURABLE CSS ELSE THEY DEFAULT TO .stack-default
 const projectStacks = [
   { name: "HTML", className: "stack-html" },
   { name: "CSS", className: "stack-css" },
@@ -28,7 +30,7 @@ const portfolioProjects = [
   },
   {
     number: "02",
-    name: "Swappr",
+    name: "SWAPPR",
     description: "Insert description here.",
     stacks: ["HTML", "Tailwind CSS", "Node.js"],
     status: "green",
