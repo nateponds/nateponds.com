@@ -169,7 +169,8 @@
   }
 
   #projects {
-    padding: 84px 0;
+    padding: 92px 0 84px;
+    scroll-margin-top: -12px;
   }
 
   .projects-heading {
@@ -225,7 +226,7 @@
 
 @media (max-width: 900px) {
   #contact {
-    padding-top: 86px;
+    padding-top: 106px;
   }
 
   .contact-heading h2 {
@@ -238,8 +239,12 @@
 }
 
 @media (max-width: 560px) {
+  #projects {
+    padding: 88px 0 84px;
+  }
+
   #contact {
-    padding: 74px 0 118px;
+    padding: 94px 0 118px;
   }
 
   .contact-heading {
