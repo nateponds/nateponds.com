@@ -319,7 +319,7 @@
     vec3 boostGlowstickColor(vec3 color) {
       float luma = dot(color, vec3(0.299, 0.587, 0.114));
       vec3 saturated = mix(vec3(luma), color, 1.38);
-      return min(saturated * 1.18, vec3(1.0));
+      return min(saturated * 1.08, vec3(0.96));
     }
 
     void main() {
@@ -385,7 +385,9 @@
       float edgeAmbient = smoothstep(0.62, 1.7, length(uv));
       col += glowColor * edgeAmbient * 0.055;
 
-      col = 1.0 - exp(-col * 1.55);
+      col = 1.0 - exp(-col * 1.38);
+      vec3 paletteTint = glowstickColor / max(max(glowstickColor.r, glowstickColor.g), glowstickColor.b);
+      col *= mix(vec3(1.0), paletteTint, 0.22);
 
       gl_FragColor = vec4(col, 1.0);
     }
@@ -463,10 +465,13 @@
     );
   }
 
-  function brightenColor(color, amount = 0.38) {
-    return color.map((channel) =>
-      Math.round(channel + (255 - channel) * amount),
-    );
+  function liftGlowColor(color, lift = 1.16, saturation = 1.18) {
+    const luma = color[0] * 0.299 + color[1] * 0.587 + color[2] * 0.114;
+
+    return color.map((channel) => {
+      const saturated = luma + (channel - luma) * saturation;
+      return Math.round(clamp(saturated * lift, 0, 245));
+    });
   }
 
   function setContactAccent(elapsedSeconds) {
@@ -479,7 +484,7 @@
       contactAccentPalette[toIndex],
       amount,
     );
-    const accentLight = brightenColor(accent);
+    const accentLight = liftGlowColor(accent);
 
     contact.style.setProperty("--contact-accent-rgb", accent.join(", "));
     contact.style.setProperty(
