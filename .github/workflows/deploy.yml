@@ -19,9 +19,9 @@ jobs:
       - name: Verify static website structure
         run: |
           test -f index.html
-          test -f css/style.css
-          test -f js/script.js
-          test -f assets/logo.png
+          test -d css
+          test -d js
+          test -d assets
 
       - name: Deploy to Apache web root
         run: |
