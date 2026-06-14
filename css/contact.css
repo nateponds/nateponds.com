@@ -11,8 +11,16 @@
   overflow: hidden;
   padding: 104px 0 156px;
   background:
-    linear-gradient(90deg, rgba(var(--contact-accent-rgb), 0.045), transparent 32%),
-    linear-gradient(270deg, rgba(var(--contact-accent-light-rgb), 0.04), transparent 38%),
+    linear-gradient(
+      90deg,
+      rgba(var(--contact-accent-rgb), 0.045),
+      transparent 32%
+    ),
+    linear-gradient(
+      270deg,
+      rgba(var(--contact-accent-light-rgb), 0.04),
+      transparent 38%
+    ),
     linear-gradient(180deg, #05060a 0%, #080a0f 58%, #030407 100%);
   border-top: 1px solid rgba(var(--contact-accent-rgb), 0.18);
   color: var(--contact-ink);
@@ -124,7 +132,11 @@
   border: 1px solid rgba(var(--contact-accent-rgb), 0.2);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(var(--contact-accent-rgb), 0.08), transparent 42%),
+    linear-gradient(
+      135deg,
+      rgba(var(--contact-accent-rgb), 0.08),
+      transparent 42%
+    ),
     linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
     rgba(5, 6, 10, 0);
   box-shadow:
@@ -236,6 +248,7 @@
 
 .contact-method-muted {
   border-style: dashed;
+  cursor: not-allowed;
 }
 
 .contact-bottom {
