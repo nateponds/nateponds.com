@@ -1,20 +1,23 @@
 #contact {
-  --contact-orange: #ff6a2a;
-  --contact-orange-line: rgba(255, 106, 42, 0.44);
+  --contact-accent-rgb: 0, 195, 165;
+  --contact-accent-light-rgb: 97, 218, 199;
+  --contact-orange: rgb(var(--contact-accent-rgb));
+  --contact-orange-line: rgba(var(--contact-accent-rgb), 0.34);
   --contact-ink: #f0f0f4;
   --contact-muted: rgba(240, 240, 244, 0.62);
-  --contact-panel: rgba(255, 255, 255, 0.045);
+  --contact-panel: rgba(255, 255, 255, 0);
 
   position: relative;
   overflow: hidden;
-  padding: 104px 0 72px;
+  padding: 104px 0 156px;
   background:
-    linear-gradient(90deg, rgba(255, 106, 42, 0.08), transparent 32%),
-    linear-gradient(270deg, rgba(255, 154, 86, 0.08), transparent 38%),
+    linear-gradient(90deg, rgba(var(--contact-accent-rgb), 0.045), transparent 32%),
+    linear-gradient(270deg, rgba(var(--contact-accent-light-rgb), 0.04), transparent 38%),
     linear-gradient(180deg, #05060a 0%, #080a0f 58%, #030407 100%);
-  border-top: 1px solid rgba(255, 106, 42, 0.22);
+  border-top: 1px solid rgba(var(--contact-accent-rgb), 0.18);
   color: var(--contact-ink);
-  scroll-margin-top: 64px;
+  scroll-margin-top: -48px;
+  border-radius: clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px) 0 0;
 }
 
 #contact::before {
@@ -23,12 +26,13 @@
   top: 0;
   left: clamp(32px, 7vw, 120px);
   right: clamp(32px, 7vw, 120px);
+  z-index: 1;
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent,
     var(--contact-orange),
-    rgba(255, 194, 133, 0.34),
+    rgba(126, 200, 227, 0.24),
     transparent
   );
   pointer-events: none;
@@ -38,6 +42,7 @@
   content: "";
   position: absolute;
   inset: auto 0 0;
+  z-index: 1;
   height: 140px;
   background:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
@@ -49,9 +54,21 @@
   pointer-events: none;
 }
 
+#contact-canvas {
+  display: block;
+  position: absolute;
+  inset: -36px;
+  z-index: 0;
+  width: calc(100% + 72px);
+  height: calc(100% + 72px);
+  opacity: 0.44;
+  filter: blur(18px) saturate(1.15);
+  pointer-events: none;
+}
+
 .contact-container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .contact-heading {
@@ -104,12 +121,12 @@
   position: relative;
   min-height: 300px;
   padding: 34px;
-  border: 1px solid rgba(255, 106, 42, 0.24);
+  border: 1px solid rgba(var(--contact-accent-rgb), 0.2);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(255, 106, 42, 0.14), transparent 42%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent),
-    rgba(5, 6, 10, 0.78);
+    linear-gradient(135deg, rgba(var(--contact-accent-rgb), 0.08), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
+    rgba(5, 6, 10, 0);
   box-shadow:
     0 24px 68px rgba(0, 0, 0, 0.32),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -123,7 +140,7 @@
   border-radius: 50%;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 0 34px rgba(255, 106, 42, 0.24);
+    0 0 34px rgba(var(--contact-accent-rgb), 0.18);
 }
 
 .contact-email {
@@ -143,11 +160,6 @@
   transition:
     color 0.18s ease,
     transform 0.18s ease;
-}
-
-.contact-email:hover,
-.contact-email:focus-visible {
-  color: #ffc285;
 }
 
 .contact-email:focus-visible,
@@ -190,7 +202,7 @@
 .contact-method:hover,
 .contact-method:focus-visible {
   border-color: var(--contact-orange-line);
-  background: rgba(255, 106, 42, 0.1);
+  background: rgba(var(--contact-accent-rgb), 0.05);
   color: #ffffff;
 }
 
@@ -229,12 +241,18 @@
 .contact-bottom {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
+  gap: 24px;
   margin-top: 58px;
   padding-top: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-legal {
+  display: grid;
+  max-width: 720px;
+  gap: 8px;
 }
 
 .contact-bottom p,
@@ -244,8 +262,12 @@
   letter-spacing: 0;
 }
 
+.contact-bottom p {
+  line-height: 1.65;
+}
+
 .contact-bottom a {
-  color: #ffc285;
+  color: rgb(var(--contact-accent-light-rgb));
   font-weight: 750;
   text-decoration: none;
   transition:
