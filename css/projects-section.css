@@ -101,10 +101,6 @@
   gap: clamp(20px, 4vw, 48px);
 }
 
-.project-row:nth-child(even) {
-  flex-direction: row-reverse;
-}
-
 .project-visual,
 .project-card {
   flex: 1 1 0;
