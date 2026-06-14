@@ -111,6 +111,16 @@
   line-height: 1.05;
 }
 
+.contact-heading h2 span {
+  color: rgb(var(--contact-accent-light-rgb));
+  text-shadow:
+    0 0 18px rgba(var(--contact-accent-rgb), 0.28),
+    0 0 42px rgba(var(--contact-accent-rgb), 0.16);
+  transition:
+    color 0.28s ease,
+    text-shadow 0.28s ease;
+}
+
 .contact-heading p {
   max-width: 680px;
   color: var(--contact-muted);
