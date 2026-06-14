@@ -21,11 +21,45 @@ window.addEventListener("load", () => {
 // NAV GLASS EFFECT AFTER SCROLLING FROM HERO
 const nav = document.querySelector("nav");
 const hero = document.querySelector("#hero");
+const contact = document.querySelector("#contact");
 
 if (nav && hero && "IntersectionObserver" in window) {
-  const navObserver = new IntersectionObserver(
+  let heroActive = true;
+  let contactActive = false;
+  let navScrollTicking = false;
+
+  function updateNavGlass() {
+    nav.classList.toggle("is-scrolled", !heroActive && !contactActive);
+  }
+
+  function updateContactNavState() {
+    if (!contact) return;
+
+    const navRect = nav.getBoundingClientRect();
+    const contactRect = contact.getBoundingClientRect();
+
+    contactActive =
+      contactRect.top <= navRect.bottom + 12 &&
+      contactRect.bottom >= navRect.top;
+
+    updateNavGlass();
+  }
+
+  function requestContactNavStateUpdate() {
+    if (navScrollTicking) return;
+
+    navScrollTicking = true;
+
+    requestAnimationFrame(() => {
+      navScrollTicking = false;
+      updateContactNavState();
+    });
+  }
+
+  const heroObserver = new IntersectionObserver(
     ([entry]) => {
-      nav.classList.toggle("is-scrolled", !entry.isIntersecting);
+      heroActive = entry.isIntersecting;
+      updateNavGlass();
     },
     {
       threshold: 0,
@@ -33,7 +67,15 @@ if (nav && hero && "IntersectionObserver" in window) {
     },
   );
 
-  navObserver.observe(hero);
+  heroObserver.observe(hero);
+
+  if (contact) {
+    window.addEventListener("scroll", requestContactNavStateUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", requestContactNavStateUpdate);
+    updateContactNavState();
+  }
 }
 
 // ABOUT TERMINAL TYPING EFFECT
@@ -380,7 +422,10 @@ function initProjectsReveal() {
       if (watchedItems.has(item)) return;
 
       watchedItems.add(item);
-      item.style.setProperty("--projects-reveal-delay", `${Math.min(index, 2) * 80}ms`);
+      item.style.setProperty(
+        "--projects-reveal-delay",
+        `${Math.min(index, 2) * 80}ms`,
+      );
       projectsItemObserver.observe(item);
     });
   }

@@ -1,6 +1,6 @@
 // <!-- ─────────────────────────────────────────────────────
 //      WebGL background shader — PS4 DualShock palette
-//      △ #00C3A5  ○ #FF6B6B  ✕ #7EC8E3  □ #E87BF0  Lightbar #0096FF
+//   △ #00C3A5  ○ #FF6B6B  ✕ #7EC8E3  □ #E87BF0  Lightbar #0096FF
 // ──────────────────────────────────────────────────────── -->
 (function () {
   const canvas = document.getElementById("hero-canvas");
