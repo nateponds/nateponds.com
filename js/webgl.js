@@ -45,7 +45,7 @@
       c[3] = vec3(0.910, 0.482, 0.941); /* □ magenta */
       c[4] = vec3(0.000, 0.588, 1.000); /* lightbar  */
 
-      for (int i = 0; i < 24; i++) {
+      for (int i = 0; i < 18; i++) {
         float fi    = float(i);
         float ci    = mod(fi, 5.0);
         float phase = fi * 1.1547 + t;
@@ -117,6 +117,12 @@
   let targetX = 0;
   let targetY = 0;
   let lastTs = 0;
+  let rafId = null;
+  let isRendering = false;
+  let lastRenderLog = "";
+
+  // SPECIAL DEBUG FOR DEVELOPMENT TO LOG CONSOLE FOR PERFORMANCE PATCH
+  const DEBUG_WEBGL = false;
 
   function clamp(v, min, max) {
     return Math.max(min, Math.min(max, v));
@@ -148,6 +154,7 @@
   window.addEventListener("resize", resize);
 
   const hero = document.getElementById("hero");
+  const projects = document.getElementById("projects");
 
   function updateTargetFromPointer(e) {
     const r = canvas.getBoundingClientRect();
@@ -166,7 +173,83 @@
 
   let start = null;
 
+  function getRenderState() {
+    if (document.hidden) {
+      return {
+        shouldRender: false,
+        reason: "tab hidden",
+      };
+    }
+
+    if (!projects) {
+      return {
+        shouldRender: true,
+        reason: "#projects not found",
+      };
+    }
+
+    const projectsTop = projects.getBoundingClientRect().top;
+    const viewportH =
+      window.innerHeight || document.documentElement.clientHeight;
+    const shouldRender = projectsTop > viewportH * 0.92;
+
+    return {
+      shouldRender,
+      reason: shouldRender
+        ? "hero/about range active"
+        : "#projects is near or visible",
+    };
+  }
+
+  function logRenderStatus(status, reason) {
+    if (!DEBUG_WEBGL) return;
+
+    const message = `${status}: ${reason}`;
+
+    if (message === lastRenderLog) return;
+
+    lastRenderLog = message;
+    console.log(`[webgl] ${message}`);
+  }
+
+  function startRenderLoop(reason) {
+    if (isRendering) return;
+
+    isRendering = true;
+    lastTs = 0;
+    logRenderStatus("rendering started", reason);
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function stopRenderLoop(reason) {
+    if (!isRendering) {
+      logRenderStatus("rendering idle", reason);
+      return;
+    }
+
+    isRendering = false;
+    logRenderStatus("rendering stopped", reason);
+
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  function updateRenderState() {
+    const state = getRenderState();
+
+    if (state.shouldRender) {
+      startRenderLoop(state.reason);
+      return;
+    }
+
+    stopRenderLoop(state.reason);
+  }
+
   function frame(ts) {
+    if (!isRendering) return;
+
     if (!start) start = ts;
     if (!lastTs) lastTs = ts;
 
@@ -184,8 +267,14 @@
     gl.uniform2f(uMouse, mouseX, mouseY);
 
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(frame);
   }
 
-  requestAnimationFrame(frame);
+  window.addEventListener("scroll", updateRenderState, {
+    passive: true,
+  });
+  window.addEventListener("resize", updateRenderState);
+  document.addEventListener("visibilitychange", updateRenderState);
+
+  updateRenderState();
 })();
