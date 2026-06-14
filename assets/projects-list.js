@@ -19,7 +19,8 @@ const portfolioProjects = [
   {
     number: "01",
     name: "Nateflix",
-    description: "Insert description here.",
+    description:
+      "A planned streaming platform built to deepen backend development experience, designed to host public-domain films and shows through a custom web application.",
     stacks: ["HTML", "CSS", "Express.js", "Node.js", "Mongoose"],
     status: "blue",
     statusLabel: "",
@@ -31,7 +32,8 @@ const portfolioProjects = [
   {
     number: "02",
     name: "SWAPPR",
-    description: "Insert description here.",
+    description:
+      "A prototype study-buddy matching platform developed by Freya Hermosilla and publicly served by Nathaniel Ponce, using matchmaking-style logic to help students find compatible partners.",
     stacks: ["HTML", "Tailwind CSS", "Node.js"],
     status: "green",
     statusLabel: "",
@@ -43,7 +45,8 @@ const portfolioProjects = [
   {
     number: "03",
     name: "Aqualine",
-    description: "Insert description here.",
+    description:
+      "A custom logistics and inventory database system developed by Joannah Bael and Nathaniel Ponce for Aqualine, a water refilling station, to streamline tracking and daily operations.",
     stacks: ["HTML", "CSS", "JS", "PHP", "MySQL"],
     status: "green",
     statusLabel: "",
@@ -55,7 +58,8 @@ const portfolioProjects = [
   {
     number: "04",
     name: "Linko",
-    description: "Insert description here.",
+    description:
+      "A planned supplier-matching platform for MSMEs and wholesale providers, designed to improve supplier discovery, client acquisition, and supply-chain coordination for growing businesses.",
     stacks: ["HTML", "CSS", "JS"],
     status: "blue",
     statusLabel: "",
