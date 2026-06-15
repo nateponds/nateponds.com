@@ -85,7 +85,7 @@
   }
 
   #about-terminal-output {
-    min-height: 260px;
+    min-height: 270px;
   }
 
   .terminal-line {
@@ -376,5 +376,11 @@
     justify-content: flex-start;
     padding: 12px 14px;
     border-radius: 14px;
+  }
+}
+
+@media (max-width: 652px) {
+  #about-terminal-output {
+    min-height: 400px;
   }
 }
