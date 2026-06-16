@@ -35,7 +35,7 @@ const portfolioProjects = [
     description:
       "A prototype study-buddy matching platform developed by Freya Hermosilla and publicly served by Nathaniel Ponce, using matchmaking-style logic to help students find compatible partners.",
     stacks: ["HTML", "Tailwind CSS", "Node.js"],
-    status: "green",
+    status: "yellow",
     statusLabel: "",
     url: "https://swappr.nateponds.com",
     featured: true,
