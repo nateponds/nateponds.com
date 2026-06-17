@@ -108,6 +108,7 @@
 }
 
 .project-visual {
+  box-sizing: border-box;
   display: flex;
   overflow: hidden;
   height: clamp(320px, 32vw, 420px);
@@ -128,7 +129,6 @@
 .project-visual.has-image {
   align-items: center;
   justify-content: center;
-  padding: clamp(14px, 2vw, 24px);
 }
 
 .project-visual img {
