@@ -256,8 +256,12 @@
   color: #f3f4f6;
 }
 
-.stack-mongoose {
-  color: #e06c75;
+.stack-mongoDB {
+  color: #47a248;
+}
+
+.stack-postgresql {
+  color: #699eca;
 }
 
 .stack-tailscale {

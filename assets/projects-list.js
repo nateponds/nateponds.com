@@ -11,7 +11,8 @@ const projectStacks = [
   { name: "C#", className: "stack-csharp" },
   { name: "Node.js", className: "stack-node" },
   { name: "Express.js", className: "stack-express" },
-  { name: "Mongoose", className: "stack-mongoose" },
+  { name: "MongoDB", className: "stack-mongoDB" },
+  { name: "PostgreSQL", className: "stack-postgresql" },
   { name: "Tailwind CSS", className: "stack-tailwind" },
 ];
 // set to red yellow green or blue for project status on the server
@@ -21,7 +22,7 @@ const portfolioProjects = [
     name: "Nateflix",
     description:
       "A planned streaming platform built to deepen backend development experience, designed to host public-domain films and shows through a custom web application.",
-    stacks: ["HTML", "CSS", "Express.js", "Node.js", "Mongoose"],
+    stacks: ["React", "CSS", "Express.js", "Node.js", "PostgreSQL"],
     status: "blue",
     statusLabel: "",
     url: "#",
@@ -60,7 +61,7 @@ const portfolioProjects = [
     name: "Linko",
     description:
       "A planned supplier-matching platform for MSMEs and wholesale providers, designed to improve supplier discovery, client acquisition, and supply-chain coordination for growing businesses.",
-    stacks: ["HTML", "CSS", "JS"],
+    stacks: ["React", "CSS", "Node.js", "Express.js", ""],
     status: "blue",
     statusLabel: "",
     url: "#",
@@ -96,3 +97,7 @@ const portfolioProjects = [
 
 window.projectStacks = projectStacks;
 window.portfolioProjects = portfolioProjects;
+
+// TO DO
+// - use nodejs to check the servers live status and update it here
+// on the front-end
