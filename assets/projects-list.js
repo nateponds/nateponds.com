@@ -69,30 +69,6 @@ const portfolioProjects = [
     image: "",
     imageAlt: "",
   },
-  // {
-  //   number: "98",
-  //   name: "DUMMY",
-  //   description: "Insert description here.",
-  //   stacks: ["HTML", "CSS", "JS"],
-  //   status: "blue",
-  //   statusLabel: "",
-  //   url: "#",
-  //   featured: true,
-  //   image: "",
-  //   imageAlt: "",
-  // },
-  // {
-  //   number: "99",
-  //   name: "DUMMU",
-  //   description: "Insert description here.",
-  //   stacks: ["HTML", "CSS", "JS"],
-  //   status: "blue",
-  //   statusLabel: "",
-  //   url: "#",
-  //   featured: true,
-  //   image: "",
-  //   imageAlt: "",
-  // },
 ];
 
 window.projectStacks = projectStacks;

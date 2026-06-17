@@ -28,9 +28,6 @@ jobs:
           test -d js
           test -d assets
 
-      - name: Update project statuses
-        run: npm run update-project-statuses
-
       - name: Deploy to Apache web root
         run: |
           set -euo pipefail
