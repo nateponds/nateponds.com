@@ -36,7 +36,7 @@ const portfolioProjects = [
     description:
       "A prototype study-buddy matching platform developed by Freya Hermosilla and publicly served by Nathaniel Ponce, using matchmaking-style logic to help students find compatible partners.",
     stacks: ["HTML", "Tailwind CSS", "Node.js"],
-    status: "yellow",
+    status: "green",
     statusLabel: "",
     url: "https://swappr.nateponds.com",
     featured: true,
@@ -61,7 +61,7 @@ const portfolioProjects = [
     name: "Linko",
     description:
       "A planned supplier-matching platform for MSMEs and wholesale providers, designed to improve supplier discovery, client acquisition, and supply-chain coordination for growing businesses.",
-    stacks: ["React", "CSS", "Node.js", "Express.js", ""],
+    stacks: ["React", "CSS", "Node.js", "Express.js", "PostgreSQL"],
     status: "blue",
     statusLabel: "",
     url: "#",
