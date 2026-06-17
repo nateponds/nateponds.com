@@ -129,12 +129,6 @@ nav {
     opacity 0.2s ease;
 }
 
-#site-logo:hover img {
-  transform: rotate(-3deg) scale(1.04);
-  filter: drop-shadow(0 0 22px rgba(126, 200, 227, 0.5))
-    drop-shadow(0 12px 22px rgba(0, 0, 0, 0.5));
-}
-
 .nav-link-container {
   position: relative;
   isolation: isolate;
@@ -1022,4 +1016,3 @@ section {
     opacity: 0;
   }
 }
-

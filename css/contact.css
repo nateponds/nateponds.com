@@ -109,6 +109,7 @@
   font-weight: 650;
   letter-spacing: 0;
   line-height: 1.05;
+  user-select: none;
 }
 
 .contact-heading h2 span {
