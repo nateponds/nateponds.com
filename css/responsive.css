@@ -381,6 +381,6 @@
 
 @media (max-width: 652px) {
   #about-terminal-output {
-    min-height: 400px;
+    min-height: 18rem;
   }
 }
