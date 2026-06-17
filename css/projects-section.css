@@ -111,9 +111,8 @@
   box-sizing: border-box;
   display: flex;
   overflow: hidden;
-  height: clamp(320px, 32vw, 420px);
+  min-height: clamp(320px, 32vw, 420px);
   min-width: 280px;
-  aspect-ratio: 16 / 10;
   align-items: flex-end;
   padding: clamp(22px, 4vw, 38px);
   border: 1px solid rgba(255, 255, 255, 0.1);

@@ -203,9 +203,9 @@
   }
 
   .project-visual {
-    height: 260px;
+    height: auto;
+    min-height: 260px;
     min-width: 0;
-    aspect-ratio: 16 / 11;
   }
 
   .project-visual img {
