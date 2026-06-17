@@ -156,7 +156,38 @@
         : `<span class="project-link projects-more-link project-link-disabled" aria-disabled="true">More Projects Coming Soon</span>`;
   }
 
-  function initializePortfolio() {
+  async function updateProjectStatuses() {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 3000);
+
+    try {
+      const response = await fetch("/api/project-statuses", {
+        signal: controller.signal,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Status API returned ${response.status}`);
+      }
+
+      const liveStatuses = await response.json();
+
+      projects.forEach((project) => {
+        const projectId = String(getValue(project, ["number", "tag"]));
+
+        if (Object.prototype.hasOwnProperty.call(liveStatuses, projectId)) {
+          project.status = liveStatuses[projectId];
+        }
+      });
+    } catch (error) {
+      console.warn("Using static project statuses because live statuses failed.", error);
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  async function initializePortfolio() {
+    await updateProjectStatuses();
+
     const featuredGrid = document.querySelector("#featured-projects-grid");
     const allGrid = document.querySelector("#all-projects-grid");
 
