@@ -30,7 +30,11 @@
 
   function getValue(project, keys, fallback = "") {
     for (const key of keys) {
-      if (project[key] !== undefined && project[key] !== null && project[key] !== "") {
+      if (
+        project[key] !== undefined &&
+        project[key] !== null &&
+        project[key] !== ""
+      ) {
         return project[key];
       }
     }
@@ -39,7 +43,9 @@
   }
 
   function getStatusBadge(project) {
-    const status = String(getValue(project, ["status", "state"], "yellow")).toLowerCase();
+    const status = String(
+      getValue(project, ["status", "state"], "yellow"),
+    ).toLowerCase();
     const label = getValue(
       project,
       ["statusLabel", "statusText", "stateLabel"],
@@ -56,7 +62,9 @@
   }
 
   function isProjectAvailable(project) {
-    const status = String(getValue(project, ["status", "state"], "yellow")).toLowerCase();
+    const status = String(
+      getValue(project, ["status", "state"], "yellow"),
+    ).toLowerCase();
 
     return status === "green" || status === "live";
   }
@@ -71,7 +79,11 @@
   }
 
   function getProjectStacks(project) {
-    const stacks = getValue(project, ["stacks", "stackList", "technologies"], []);
+    const stacks = getValue(
+      project,
+      ["stacks", "stackList", "technologies"],
+      [],
+    );
 
     if (Array.isArray(stacks)) {
       return stacks;
@@ -100,12 +112,29 @@
   }
 
   function createProjectCard(project, index) {
-    const number = getValue(project, ["number", "tag"], String(index + 1).padStart(2, "0"));
+    const number = getValue(
+      project,
+      ["number", "tag"],
+      String(index + 1).padStart(2, "0"),
+    );
     const name = getValue(project, ["name", "title"], "Untitled Project");
-    const description = getValue(project, ["description", "desc"], "Insert description here.");
+    const description = getValue(
+      project,
+      ["description", "desc"],
+      "Insert description here.",
+    );
     const url = getValue(project, ["url", "href", "link"], "#");
-    const image = getValue(project, ["image", "imageSrc", "thumbnail", "preview"]);
-    const imageAlt = getValue(project, ["imageAlt", "alt"], `${name} project preview`);
+    const image = getValue(project, [
+      "image",
+      "imageSrc",
+      "thumbnail",
+      "preview",
+    ]);
+    const imageAlt = getValue(
+      project,
+      ["imageAlt", "alt"],
+      `${name} project preview`,
+    );
     const isAvailable = isProjectAvailable(project);
     const projectAction = isAvailable
       ? `<a href="${url}" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>`
@@ -179,7 +208,10 @@
         }
       });
     } catch (error) {
-      console.warn("Using static project statuses because live statuses failed.", error);
+      console.warn(
+        "Using static project statuses because live statuses failed.",
+        error,
+      );
     } finally {
       clearTimeout(timeout);
     }
@@ -200,7 +232,25 @@
     renderProjectsMoreAction();
   }
 
-  document.addEventListener("DOMContentLoaded", initializePortfolio);
+  document.addEventListener("DOMContentLoaded", () => {
+    let isRefreshingProjects = false;
+
+    async function refreshProjects() {
+      if (isRefreshingProjects) return;
+
+      isRefreshingProjects = true;
+
+      try {
+        await initializePortfolio();
+      } finally {
+        isRefreshingProjects = false;
+      }
+    }
+
+    refreshProjects();
+
+    setInterval(refreshProjects, 5 * 60 * 1000);
+  });
 
   window.getStatusBadge = getStatusBadge;
   window.renderProjectCards = renderProjectCards;
