@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "update-project-statuses": "node scripts/update-project-statuses.js"
+  }
+}

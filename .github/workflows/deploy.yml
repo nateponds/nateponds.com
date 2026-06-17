@@ -16,12 +16,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Verify static website structure
         run: |
           test -f index.html
           test -d css
           test -d js
           test -d assets
+
+      - name: Update project statuses
+        run: npm run update-project-statuses
 
       - name: Deploy to Apache web root
         run: |
