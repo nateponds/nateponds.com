@@ -1,6 +1,6 @@
 # Nathaniel Ponce Portfolio
 
-Static portfolio website for Nathaniel Ryan Ponce. The site presents a personal introduction, technology stack carousel, featured projects, live project availability badges, and contact information.
+Portfolio website for Nathaniel Ryan Ponce. The site presents a personal introduction, technology stack carousel, featured projects, live project availability badges, and contact information.
 
 The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, served as static files from an Ubuntu Apache environment.
 
@@ -65,12 +65,12 @@ The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, serv
 
 Each project can use one of these statuses:
 
-| Status | Meaning |
-| --- | --- |
-| `blue` | Planned or no live URL configured |
-| `green` | Online and responding with a proper website |
+| Status   | Meaning                                                                                                        |
+| -------- | -------------------------------------------------------------------------------------------------------------- |
+| `blue`   | Planned or no live URL configured                                                                              |
+| `green`  | Online and responding with a proper website                                                                    |
 | `yellow` | Reachable, but appears to be an error, placeholder, maintenance page, HTTP error page, or non-website response |
-| `red` | Offline, invalid URL, timeout, DNS failure, or network failure |
+| `red`    | Offline, invalid URL, timeout, DNS failure, or network failure                                                 |
 
 The UI labels are defined in `js/projects-init.js`.
 
