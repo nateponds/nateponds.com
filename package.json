@@ -1,6 +1,18 @@
 {
+  "name": "nateponds-portfolio",
   "private": true,
+  "version": "1.0.0",
+  "description": "Static portfolio frontend with a local project status API.",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "api": "node server.js",
     "update-project-statuses": "node scripts/update-project-statuses.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }

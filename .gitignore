@@ -1,2 +1,5 @@
 docs/
 fiveserver.config.js
+node_modules/
+import/
+.env

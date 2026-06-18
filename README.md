@@ -2,7 +2,7 @@
 
 Portfolio website for Nathaniel Ryan Ponce. The site presents a personal introduction, technology stack carousel, featured projects, live project availability badges, and contact information.
 
-The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, served as static files from an Ubuntu Apache environment.
+The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, served as static files from an Ubuntu Apache environment. The local Node/Express status API now lives in this same repo and can be reverse-proxied by Apache at `/api/project-statuses`.
 
 ## Features
 
@@ -39,6 +39,7 @@ The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, serv
 |-- .github/workflows/
 |   `-- deploy.yml
 |-- index.html
+|-- server.js
 |-- projects.html
 |-- package.json
 `-- README.md
@@ -58,6 +59,8 @@ The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, serv
 `js/projects-init.js` renders project cards from `window.portfolioProjects`. Before rendering, it attempts to fetch live statuses from `/api/project-statuses`. It also polls that endpoint every 5 minutes while the page is open.
 
 `js/stack-carousel.js` owns the About section stack carousel. Add or reorder carousel technologies in the `stacks` array inside this file.
+
+`server.js` is the Express API service for `GET /api/project-statuses`. It reads projects from `assets/projects-list.js`, checks each live URL, caches the result for 5 minutes, and returns status colors to the frontend.
 
 `scripts/update-project-statuses.js` is a Node-based URL checker. It can update the hardcoded fallback `status` values in `assets/projects-list.js`.
 
@@ -104,7 +107,23 @@ Client-side behavior:
 - Polling interval: every 5 minutes
 - Overlap protection: a refresh will not start if a previous refresh is still running
 
-The backend service for `/api/project-statuses` is expected to run outside this static frontend, usually as a small local Node service behind Apache reverse proxy.
+The backend service for `/api/project-statuses` runs from this repo:
+
+```bash
+npm install
+npm run api
+```
+
+By default it binds to `127.0.0.1:3001`. Optional environment variables:
+
+```text
+HOST=127.0.0.1
+PORT=3001
+PROJECT_STATUS_TIMEOUT_MS=5000
+PROJECT_STATUS_CACHE_TTL_MS=300000
+```
+
+Apache or another edge server should reverse-proxy `/api/` to the local API process.
 
 ## Static Status Update Script
 
@@ -136,7 +155,13 @@ If using Five Server or VS Code Live Server, open:
 index.html
 ```
 
-If using Node tooling:
+Install dependencies once:
+
+```bash
+npm install
+```
+
+If using Node tooling for the static frontend:
 
 ```bash
 npx serve .
@@ -144,7 +169,19 @@ npx serve .
 
 Then visit the local URL printed by the command.
 
-The live status API will only work locally if you also provide a local `/api/project-statuses` endpoint or proxy. Without that API, the frontend will fall back to the static statuses.
+Run the API in a second terminal:
+
+```bash
+npm run api
+```
+
+The API itself is available at:
+
+```text
+http://127.0.0.1:3001/api/project-statuses
+```
+
+Without a local reverse proxy from the frontend origin to this API, the frontend will fall back to the static statuses.
 
 ## Editing Projects
 
@@ -207,7 +244,7 @@ Current flow:
 1. Runs on push to `main`
 2. Uses a self-hosted Linux runner
 3. Checks that the static site files exist
-4. Copies the repo to the Apache web root with `rsync`
+4. Copies the unified repo to the Apache web root with `rsync`
 5. Sets read permissions
 6. Purges Cloudflare cache
 
@@ -216,6 +253,8 @@ The configured Apache target path is:
 ```text
 /mnt/Storage2_New/website-hosting/nateponds-portfolio
 ```
+
+After deployment, run the API from the same target directory with `npm install --omit=dev` and `npm run api`, usually under `systemd`, `pm2`, or another process manager. Keep Apache serving the static files from this directory and reverse-proxy `/api/` to `http://127.0.0.1:3001/`.
 
 Required GitHub secrets:
 
@@ -226,7 +265,7 @@ CLOUDFLARE_API_TOKEN
 
 ## Notes
 
-- This repo does not currently contain the backend implementation for `/api/project-statuses`.
+- The backend implementation for `/api/project-statuses` now lives in `server.js`.
 - The frontend is safe without the API because it falls back to static statuses.
 - Keep image assets in `assets/images/`.
 - Keep project rendering changes in `js/projects-init.js`.

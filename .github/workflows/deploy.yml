@@ -24,6 +24,9 @@ jobs:
       - name: Verify static website structure
         run: |
           test -f index.html
+          test -f server.js
+          test -f package.json
+          test -f package-lock.json
           test -d css
           test -d js
           test -d assets
@@ -37,9 +40,20 @@ jobs:
           rsync -az --delete \
             --exclude ".git/" \
             --exclude ".github/" \
+            --exclude "node_modules/" \
+            --exclude "import/" \
             ./ "$ROOT/"
 
           chmod -R u=rwX,go=rX "$ROOT"
+
+      - name: Install backend dependencies
+        run: |
+          set -euo pipefail
+
+          ROOT="/mnt/Storage2_New/website-hosting/nateponds-portfolio"
+
+          cd "$ROOT"
+          npm ci --omit=dev --ignore-scripts
 
       - name: Purge Cloudflare Cache
         env:
