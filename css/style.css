@@ -427,9 +427,6 @@ body.page-ready #hero-buttons {
     border-color 0.18s ease;
   border: none;
 }
-.hero-btn:hover {
-  /* transform: translateY(-0.4px); */
-}
 .hero-btn:active {
   transform: translateY(0) scale(0.97);
 }
