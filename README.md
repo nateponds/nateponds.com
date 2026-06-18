@@ -1,28 +1,36 @@
 # Nathaniel Ponce Portfolio
 
-Portfolio website for Nathaniel Ryan Ponce. The site presents a personal introduction, technology stack carousel, featured projects, live project availability badges, and contact information.
+Portfolio website for Nathaniel Ryan Ponce. The site presents a personal introduction, technical focus areas, a stack carousel, featured projects, live project availability badges, and contact information.
 
-The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, served as static files from an Ubuntu Apache environment. The local Node/Express status API now lives in this same repo and can be reverse-proxied by Apache at `/api/project-statuses`.
+The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript. It can run as static files, while the optional Node/Express API in this repo provides live project status checks for `/api/project-statuses`.
 
 ## Features
 
-- Responsive single-page portfolio on `index.html`
-- Separate projects archive page on `projects.html`
-- Animated WebGL hero and contact backgrounds
+- Responsive portfolio landing page on `index.html`
+- Separate project archive page on `projects.html`
+- Animated WebGL backgrounds for the hero and contact sections
 - About terminal typing animation
 - Auto-scrolling stack carousel powered by `js/stack-carousel.js`
 - Project cards generated from `assets/projects-list.js`
 - Live project status polling through `/api/project-statuses`
 - Static fallback statuses when the status API is unavailable
-- Optional Node script for checking project URLs and rewriting static status values
+- Health endpoint at `/api/health`
+- Node script for checking project URLs and rewriting static fallback statuses
 - GitHub Actions deployment workflow for a self-hosted Ubuntu Apache runner
 
 ## Project Structure
 
 ```text
 .
+|-- .github/
+|   `-- workflows/
+|       `-- deploy.yml
 |-- assets/
 |   |-- images/
+|   |   |-- aqualine.jpg
+|   |   |-- linko.png
+|   |   |-- logo.png
+|   |   `-- swappr.png
 |   `-- projects-list.js
 |-- css/
 |   |-- contact.css
@@ -36,12 +44,11 @@ The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, serv
 |   `-- webgl.js
 |-- scripts/
 |   `-- update-project-statuses.js
-|-- .github/workflows/
-|   `-- deploy.yml
 |-- index.html
-|-- server.js
-|-- projects.html
 |-- package.json
+|-- package-lock.json
+|-- projects.html
+|-- server.js
 `-- README.md
 ```
 
@@ -49,20 +56,58 @@ The frontend is intentionally lightweight: plain HTML, CSS, and JavaScript, serv
 
 `index.html` is the main landing page. It loads the global styles, section-specific styles, project data, and frontend scripts.
 
-`projects.html` is the extended projects page. It uses the same project data and rendering logic.
+`projects.html` is the extended projects page. It uses the same project data and rendering logic as the featured project section.
 
 `assets/projects-list.js` contains:
 
 - `projectStacks`: technology names and CSS class mappings for project tags
-- `portfolioProjects`: project metadata, descriptions, URLs, images, stacks, and fallback statuses
+- `portfolioProjects`: project metadata, descriptions, URLs, images, stacks, featured flags, and fallback statuses
 
-`js/projects-init.js` renders project cards from `window.portfolioProjects`. Before rendering, it attempts to fetch live statuses from `/api/project-statuses`. It also polls that endpoint every 5 minutes while the page is open.
+`js/projects-init.js` renders project cards from `window.portfolioProjects`. Before rendering, it attempts to fetch live statuses from `/api/project-statuses`, then polls that endpoint every 5 minutes while the page is open.
 
 `js/stack-carousel.js` owns the About section stack carousel. Add or reorder carousel technologies in the `stacks` array inside this file.
 
-`server.js` is the Express API service for `GET /api/project-statuses`. It reads projects from `assets/projects-list.js`, checks each live URL, caches the result for 5 minutes, and returns status colors to the frontend.
+`server.js` is the Express API service. It serves `GET /api/project-statuses` and `GET /api/health`, reads projects from `assets/projects-list.js`, checks each live URL, caches status results for 5 minutes, and returns status colors to the frontend.
 
 `scripts/update-project-statuses.js` is a Node-based URL checker. It can update the hardcoded fallback `status` values in `assets/projects-list.js`.
+
+## Requirements
+
+- Node.js 20 or newer
+- npm
+- A static file server for local frontend development, or Apache/Nginx in production
+- Optional reverse proxy from `/api/` to the local Node API service
+
+## Local Development
+
+Install dependencies once:
+
+```bash
+npm install
+```
+
+Serve the static frontend with any local static server. For example:
+
+```bash
+npx serve .
+```
+
+Then open the local URL printed by the command and visit `index.html`.
+
+Run the API in a second terminal:
+
+```bash
+npm run api
+```
+
+The API binds to `127.0.0.1:3001` by default:
+
+```text
+http://127.0.0.1:3001/api/project-statuses
+http://127.0.0.1:3001/api/health
+```
+
+Without a local reverse proxy from the frontend origin to this API, the frontend will keep using the static statuses already present in `assets/projects-list.js`.
 
 ## Project Status System
 
@@ -75,11 +120,11 @@ Each project can use one of these statuses:
 | `yellow` | Reachable, but appears to be an error, placeholder, maintenance page, HTTP error page, or non-website response |
 | `red`    | Offline, invalid URL, timeout, DNS failure, or network failure                                                 |
 
-The UI labels are defined in `js/projects-init.js`.
+The UI labels and badge classes are defined in `js/projects-init.js`.
 
-## Live Status API Contract
+## Live Status API
 
-The frontend expects a reverse-proxied local API endpoint:
+The frontend expects this endpoint:
 
 ```text
 GET /api/project-statuses
@@ -98,23 +143,21 @@ Expected JSON shape:
 
 The keys should match each project's `number` field in `assets/projects-list.js`.
 
-If the API fails, times out, or returns a non-OK response, the site keeps using the static statuses already present in `assets/projects-list.js`.
-
 Client-side behavior:
 
 - Fetch timeout: 3 seconds
 - Initial fetch: on `DOMContentLoaded`
 - Polling interval: every 5 minutes
 - Overlap protection: a refresh will not start if a previous refresh is still running
+- Fallback: if the API fails, the static project statuses remain in use
 
-The backend service for `/api/project-statuses` runs from this repo:
+Run the backend service:
 
 ```bash
-npm install
 npm run api
 ```
 
-By default it binds to `127.0.0.1:3001`. Optional environment variables:
+Optional environment variables:
 
 ```text
 HOST=127.0.0.1
@@ -123,7 +166,7 @@ PROJECT_STATUS_TIMEOUT_MS=5000
 PROJECT_STATUS_CACHE_TTL_MS=300000
 ```
 
-Apache or another edge server should reverse-proxy `/api/` to the local API process.
+In production, Apache or another edge server should reverse-proxy `/api/` to the local API process.
 
 ## Static Status Update Script
 
@@ -142,46 +185,6 @@ PROJECT_STATUS_TIMEOUT_MS=15000 npm run update-project-statuses
 ```
 
 Default timeout is `10000` milliseconds.
-
-The script uses Node's built-in `fetch`, so use Node.js 18 or newer. Node.js 20 is recommended.
-
-## Local Development
-
-This is a static site. You can serve it with any local static server.
-
-If using Five Server or VS Code Live Server, open:
-
-```text
-index.html
-```
-
-Install dependencies once:
-
-```bash
-npm install
-```
-
-If using Node tooling for the static frontend:
-
-```bash
-npx serve .
-```
-
-Then visit the local URL printed by the command.
-
-Run the API in a second terminal:
-
-```bash
-npm run api
-```
-
-The API itself is available at:
-
-```text
-http://127.0.0.1:3001/api/project-statuses
-```
-
-Without a local reverse proxy from the frontend origin to this API, the frontend will fall back to the static statuses.
 
 ## Editing Projects
 
@@ -213,11 +216,11 @@ Add technologies to the `stacks` array:
 ```js
 {
   name: "React.js",
-  icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/react.svg",
+  icon: `${deviconBase}/react/react-original.svg`,
 }
 ```
 
-Most icons currently come from Simple Icons through jsDelivr. The carousel duplicates the stack list internally so the CSS animation can loop continuously.
+Most carousel icons currently come from Devicon through jsDelivr, with a few Simple Icons URLs where needed.
 
 The default carousel speed is controlled in `css/style.css`:
 
@@ -226,8 +229,6 @@ The default carousel speed is controlled in `css/style.css`:
   animation: stackScroll 55s linear infinite;
 }
 ```
-
-Increase the seconds to slow it down. Decrease the seconds to speed it up.
 
 Hover slowdown is controlled in `js/stack-carousel.js`:
 
@@ -243,10 +244,13 @@ Current flow:
 
 1. Runs on push to `main`
 2. Uses a self-hosted Linux runner
-3. Checks that the static site files exist
-4. Copies the unified repo to the Apache web root with `rsync`
-5. Sets read permissions
-6. Purges Cloudflare cache
+3. Sets up Node.js 20
+4. Verifies required static site and backend files exist
+5. Copies the repo to the Apache web root with `rsync`
+6. Excludes `.git/`, `.github/`, `node_modules/`, and `import/`
+7. Sets read permissions
+8. Installs production backend dependencies with `npm ci --omit=dev --ignore-scripts`
+9. Purges Cloudflare cache
 
 The configured Apache target path is:
 
@@ -254,7 +258,17 @@ The configured Apache target path is:
 /mnt/Storage2_New/website-hosting/nateponds-portfolio
 ```
 
-After deployment, run the API from the same target directory with `npm install --omit=dev` and `npm run api`, usually under `systemd`, `pm2`, or another process manager. Keep Apache serving the static files from this directory and reverse-proxy `/api/` to `http://127.0.0.1:3001/`.
+After deployment, run the API from the same target directory with:
+
+```bash
+npm run api
+```
+
+Use `systemd`, `pm2`, or another process manager to keep it running. Keep Apache serving the static files from this directory and reverse-proxy `/api/` to:
+
+```text
+http://127.0.0.1:3001/
+```
 
 Required GitHub secrets:
 
@@ -265,8 +279,9 @@ CLOUDFLARE_API_TOKEN
 
 ## Notes
 
-- The backend implementation for `/api/project-statuses` now lives in `server.js`.
+- The backend implementation for project statuses lives in `server.js`.
 - The frontend is safe without the API because it falls back to static statuses.
 - Keep image assets in `assets/images/`.
+- Keep project data in `assets/projects-list.js`.
 - Keep project rendering changes in `js/projects-init.js`.
 - Keep carousel-specific behavior in `js/stack-carousel.js`.
