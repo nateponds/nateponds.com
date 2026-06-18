@@ -66,7 +66,7 @@ const portfolioProjects = [
     statusLabel: "",
     url: "#",
     featured: true,
-    image: "",
+    image: "assets/images/linko.png",
     imageAlt: "",
   },
 ];
