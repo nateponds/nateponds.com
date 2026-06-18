@@ -54,10 +54,6 @@ function initStackCarousel() {
       icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/csharp.svg",
     },
     {
-      name: "Java",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openjdk.svg",
-    },
-    {
       name: "HTML",
       icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/html5.svg",
     },
@@ -68,6 +64,10 @@ function initStackCarousel() {
     {
       name: "JavaScript",
       icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg",
+    },
+    {
+      name: "Java",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/java.svg",
     },
     {
       name: "React.js",
