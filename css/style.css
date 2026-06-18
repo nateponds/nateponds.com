@@ -902,10 +902,12 @@ section {
   width: 34px;
   height: 34px;
   object-fit: contain;
-  filter: brightness(0) invert(1)
-    drop-shadow(0 0 12px rgba(255, 255, 255, 0.18));
-  opacity: 0.88;
+  opacity: 1;
   pointer-events: none;
+}
+
+.stack-icon-inverted {
+  filter: brightness(0) invert(1);
 }
 
 .stack-item span {

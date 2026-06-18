@@ -4,86 +4,87 @@ function initStackCarousel() {
 
   if (!stackTrack) return;
 
+  const deviconBase =
+    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
+
   const stacks = [
     {
-      name: "Server PC",
-      icon: "https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/server.svg",
-    },
-    {
       name: "Cloudflare",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cloudflare.svg",
+      icon: `${deviconBase}/cloudflare/cloudflare-original.svg`,
     },
     {
       name: "Tailscale",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tailscale.svg",
+      icon: "https://cdn.simpleicons.org/tailscale",
+      iconClassName: "stack-icon-inverted",
     },
     {
       name: "Apache",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/apache.svg",
+      icon: `${deviconBase}/apache/apache-original.svg`,
     },
     {
       name: "Nginx",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nginx.svg",
+      icon: `${deviconBase}/nginx/nginx-original.svg`,
     },
     {
       name: "Docker",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg",
+      icon: `${deviconBase}/docker/docker-original.svg`,
     },
     {
       name: "Ubuntu",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ubuntu.svg",
+      icon: `${deviconBase}/ubuntu/ubuntu-original.svg`,
     },
     {
       name: "Git",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/git.svg",
+      icon: `${deviconBase}/git/git-original.svg`,
     },
     {
       name: "GitHub",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg",
+      icon: `${deviconBase}/github/github-original.svg`,
+      iconClassName: "stack-icon-inverted",
     },
     {
       name: "C",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/c.svg",
+      icon: `${deviconBase}/c/c-original.svg`,
     },
     {
       name: "C++",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cplusplus.svg",
+      icon: `${deviconBase}/cplusplus/cplusplus-original.svg`,
     },
     {
       name: "C#",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/csharp.svg",
+      icon: `${deviconBase}/csharp/csharp-original.svg`,
     },
     {
       name: "HTML",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/html5.svg",
+      icon: `${deviconBase}/html5/html5-original.svg`,
     },
     {
       name: "CSS",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/css.svg",
+      icon: `${deviconBase}/css3/css3-original.svg`,
     },
     {
       name: "JavaScript",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg",
+      icon: `${deviconBase}/javascript/javascript-original.svg`,
     },
     {
       name: "Java",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/java.svg",
+      icon: `${deviconBase}/java/java-original.svg`,
     },
     {
       name: "React.js",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/react.svg",
+      icon: `${deviconBase}/react/react-original.svg`,
     },
     {
       name: "PHP",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/php.svg",
+      icon: `${deviconBase}/php/php-original.svg`,
     },
     {
       name: "Node.js",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg",
+      icon: `${deviconBase}/nodejs/nodejs-original.svg`,
     },
     {
       name: "MySQL",
-      icon: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/mysql.svg",
+      icon: `${deviconBase}/mysql/mysql-original.svg`,
     },
   ];
 
@@ -95,6 +96,10 @@ function initStackCarousel() {
     icon.src = stack.icon;
     icon.alt = `${stack.name} logo`;
     icon.loading = "lazy";
+
+    if (stack.iconClassName) {
+      icon.classList.add(stack.iconClassName);
+    }
 
     const label = document.createElement("span");
     label.textContent = stack.name;
