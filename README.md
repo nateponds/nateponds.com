@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/images/logo.png" alt="Nathaniel Ponce portfolio logo" width="140" />
+</p>
+
 # Nathaniel Ponce Portfolio
 
 Portfolio website for Nathaniel Ryan Ponce. The site presents a personal introduction, technical focus areas, a stack carousel, featured projects, live project availability badges, and contact information.
