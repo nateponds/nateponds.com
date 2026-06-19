@@ -21,15 +21,25 @@ jobs:
         with:
           node-version: 20
 
-      - name: Verify static website structure
+      - name: Verify application structure
         run: |
           test -f index.html
+          test -f projects.html
           test -f server.js
+          test -f vite.config.js
           test -f package.json
           test -f package-lock.json
-          test -d css
-          test -d js
+          test -d src
           test -d assets
+
+      - name: Install dependencies and build frontend
+        run: |
+          set -euo pipefail
+
+          npm ci --ignore-scripts
+          npm run build
+          test -f dist/index.html
+          test -f dist/projects.html
 
       - name: Deploy to Apache web root
         run: |
@@ -46,7 +56,7 @@ jobs:
 
           chmod -R u=rwX,go=rX "$ROOT"
 
-      - name: Install backend dependencies
+      - name: Install production backend dependencies
         run: |
           set -euo pipefail
 
@@ -54,6 +64,9 @@ jobs:
 
           cd "$ROOT"
           npm ci --omit=dev --ignore-scripts
+
+      - name: Restart Express API
+        run: sudo systemctl restart nateponds-portfolio-api.service
 
       - name: Purge Cloudflare Cache
         env:
