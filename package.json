@@ -5,6 +5,9 @@
   "description": "Static portfolio frontend with a local project status API.",
   "main": "server.js",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "start": "node server.js",
     "api": "node server.js",
     "update-project-statuses": "node scripts/update-project-statuses.js"
@@ -13,6 +16,12 @@
     "node": ">=20"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.16"
   }
 }

@@ -1,6 +1,7 @@
 docs/
 fiveserver.config.js
 node_modules/
+dist/
 import/
 .env
 graphify-out/

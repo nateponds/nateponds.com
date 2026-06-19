@@ -1,4 +1,26 @@
-# Nathaniel Ponce Portfolio
+# Nathaniel Ponce Portfolio — React migration
+
+This branch contains the React/Vite version of the portfolio. The original vanilla HTML implementation remains unchanged on `main`.
+
+## Development
+
+Run the frontend and API in separate terminals:
+
+```bash
+npm run dev
+npm run api
+```
+
+Vite serves the React app and proxies `/api` requests to the Express server on port 3001.
+
+## Production
+
+```bash
+npm run build
+npm start
+```
+
+Express serves the generated `dist` frontend and the live project-status API.
 
 Portfolio website for Nathaniel Ryan Ponce. The site presents a personal introduction, technical focus areas, a stack carousel, featured projects, live project availability badges, and contact information.
 
