@@ -244,22 +244,43 @@ setCarouselSpeed(0.45);
 
 Deployment is configured in `.github/workflows/deploy.yml`.
 
-Current flow:
+Production deployment flow:
 
 1. Runs on push to `main`
 2. Uses a self-hosted Linux runner
 3. Sets up Node.js 20
-4. Verifies required static site and backend files exist
-5. Copies the repo to the Apache web root with `rsync`
-6. Excludes `.git/`, `.github/`, `node_modules/`, and `import/`
-7. Sets read permissions
-8. Installs production backend dependencies with `npm ci --omit=dev --ignore-scripts`
-9. Purges Cloudflare cache
+4. Verifies the React/Vite source and backend files
+5. Installs all locked dependencies and runs `npm run build`
+6. Verifies that `dist/index.html` and `dist/projects.html` were generated
+7. Copies the repository, including the generated `dist/`, to the server with `rsync`
+8. Installs only production backend dependencies in the deployed directory
+9. Sets read permissions and purges the Cloudflare cache
 
-The configured Apache target path is:
+The workflow builds `dist/` in CI. Do not commit generated `dist/` files; the directory is intentionally ignored by Git.
+
+The repository and backend are deployed to:
 
 ```text
 /mnt/Storage2_New/website-hosting/nateponds-portfolio
+```
+
+Apache must serve the Vite build from:
+
+```text
+/mnt/Storage2_New/website-hosting/nateponds-portfolio/dist
+```
+
+In the Apache virtual host, set `DocumentRoot` to that `dist` directory and allow Apache to read it. Keep `/api/` reverse-proxied to the Express service:
+
+```apache
+DocumentRoot /mnt/Storage2_New/website-hosting/nateponds-portfolio/dist
+
+<Directory /mnt/Storage2_New/website-hosting/nateponds-portfolio/dist>
+    Require all granted
+</Directory>
+
+ProxyPass        /api/ http://127.0.0.1:3001/api/
+ProxyPassReverse /api/ http://127.0.0.1:3001/api/
 ```
 
 After deployment, run the API from the same target directory with:
@@ -268,10 +289,14 @@ After deployment, run the API from the same target directory with:
 npm run api
 ```
 
-Use `systemd`, `pm2`, or another process manager to keep it running. Keep Apache serving the static files from this directory and reverse-proxy `/api/` to:
+Use `systemd`, `pm2`, or another process manager to keep it running. `server.js` reads project data from `assets/projects-list.js`, provides `/api/project-statuses` and `/api/health`, and can also serve `dist/` directly if Apache is bypassed.
+
+The current workflow has no separate staging host or directory. Pushes to `react-migration-1` do not deploy; only merging the migration into `main` triggers the production deployment. Add a distinct host/path and workflow before enabling automatic staging deployment so the migration branch cannot overwrite production.
+
+The API listens by default at:
 
 ```text
-http://127.0.0.1:3001/
+http://127.0.0.1:3001/api/
 ```
 
 Required GitHub secrets:

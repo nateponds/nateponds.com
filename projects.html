@@ -1,84 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-page="projects">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="assets/images/logo.png" />
-    <title>Projects | Nathaniel Ponce</title>
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/projects-section.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+    <title>Projects | Nathaniel Ponce</title>
   </head>
-  <body class="projects-page">
-    <nav aria-label="Primary navigation">
-      <a
-        id="site-logo"
-        href="./index.html#hero"
-        aria-label="Nathaniel Ponce Home"
-      >
-        <img src="assets/images/logo.png" alt="Nathaniel Ponce Logo" />
-      </a>
-
-      <button
-        id="nav-toggle"
-        class="nav-toggle"
-        type="button"
-        aria-label="Open navigation menu"
-        aria-controls="primary-nav-links"
-        aria-expanded="false"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <div class="nav-link-container" id="primary-nav-links">
-        <ul>
-          <li><a class="nav-button" href="./index.html#hero">Home</a></li>
-          <li><a class="nav-button" href="./index.html#about">About</a></li>
-          <li>
-            <a class="nav-button" href="./index.html#projects">Projects</a>
-          </li>
-          <li><a class="nav-button" href="./index.html#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <main>
-      <section
-        id="projects"
-        class="projects-archive"
-        aria-labelledby="projects-title"
-      >
-        <div class="section-container">
-          <div class="projects-heading">
-            <div class="projects-heading-topline">
-              <a class="projects-back-link" href="./index.html#projects">
-                <span aria-hidden="true">&larr;</span>
-                Go Back
-              </a>
-              <p class="section-kicker">Portfolio Archive</p>
-            </div>
-            <h1 id="projects-title">All Projects</h1>
-          </div>
-
-          <div
-            id="all-projects-grid"
-            class="projects-list"
-            aria-label="All projects"
-          ></div>
-        </div>
-      </section>
-    </main>
-
-    <script src="js/script.js"></script>
-    <script src="assets/projects-list.js"></script>
-    <script src="js/projects-init.js"></script>
-  </body>
+  <body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body>
 </html>

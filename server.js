@@ -10,6 +10,7 @@ const port = Number(process.env.PORT || 3001);
 const cacheTtlMs = Number(process.env.PROJECT_STATUS_CACHE_TTL_MS || 5 * 60 * 1000);
 const requestTimeoutMs = Number(process.env.PROJECT_STATUS_TIMEOUT_MS || 5000);
 const projectsFile = path.join(__dirname, "assets", "projects-list.js");
+const distDirectory = path.join(__dirname, "dist");
 
 let statusCache = null;
 let cacheTimestamp = 0;
@@ -193,6 +194,14 @@ app.get("/api/project-statuses", async (req, res) => {
 
 app.get("/api/health", (req, res) => {
   res.json({ ok: true });
+});
+
+app.use(express.static(distDirectory));
+
+app.get("/{*path}", (req, res, next) => {
+  if (req.path.startsWith("/api/")) return next();
+  const page = req.path === "/projects" ? "projects.html" : "index.html";
+  return res.sendFile(path.join(distDirectory, page));
 });
 
 app.listen(port, host, () => {
