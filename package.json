@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "start": "node server.js",
     "api": "node server.js",
+    "test": "node --test test/project-status.test.js",
+    "check": "npm run test && npm run build",
     "update-project-statuses": "node scripts/update-project-statuses.js"
   },
   "engines": {

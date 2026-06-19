@@ -4,6 +4,17 @@ import { resolve } from "node:path";
 
 export default defineConfig({
   plugins: [react()],
-  build: { rollupOptions: { input: { main: resolve(__dirname, "index.html"), projects: resolve(__dirname, "projects.html") } } },
-  server: { proxy: { "/api": "http://127.0.0.1:3001" } },
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "index.html"),
+        projects: resolve(__dirname, "projects.html"),
+      },
+    },
+  },
+  server: {
+    proxy: {
+      "/api": "http://127.0.0.1:3001",
+    },
+  },
 });

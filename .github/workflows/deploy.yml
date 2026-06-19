@@ -32,12 +32,12 @@ jobs:
           test -d src
           test -d assets
 
-      - name: Install dependencies and build frontend
+      - name: Install, test, and build
         run: |
           set -euo pipefail
 
           npm ci --ignore-scripts
-          npm run build
+          npm run check
           test -f dist/index.html
           test -f dist/projects.html
 
