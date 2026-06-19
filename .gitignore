@@ -4,3 +4,4 @@ node_modules/
 import/
 .env
 graphify-out/
+dist/
