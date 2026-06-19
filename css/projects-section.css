@@ -263,6 +263,14 @@
   color: #699eca;
 }
 
+.stack-tailwind {
+  color: #38bdf8;
+}
+
+.stack-react {
+  color: #61dafb;
+}
+
 .stack-tailscale {
   color: #242424;
 }

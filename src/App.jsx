@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "../assets/images/logo.png";
 import { initialProjects, projectStacks, technologies } from "./data.js";
 
