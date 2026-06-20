@@ -2,6 +2,23 @@
   <img src="./assets/images/logo.png" alt="Nathaniel Ponce portfolio logo" width="140" />
 </p>
 
+<p align="center">
+  <a href="https://nateponds.com">Live Site</a> &bull;
+  <a href="https://nateponds.com/projects.html">Projects</a> &bull;
+  <a href="https://github.com/nateponds">GitHub</a> &bull;
+  <a href="mailto:nathanielryanponce@gmail.com">Email</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/nateponds/nateponds.com/actions/workflows/deploy.yml"><img src="https://github.com/nateponds/nateponds.com/actions/workflows/deploy.yml/badge.svg" alt="Deployment status" /></a>
+  <a href="https://nateponds.com"><img src="https://img.shields.io/website?url=https%3A%2F%2Fnateponds.com&amp;label=nateponds.com" alt="Website status" /></a>
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&amp;logoColor=white" alt="Node.js 20 or newer" /></a>
+  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&amp;logoColor=black" alt="React 19" /></a>
+  <a href="https://vite.dev/"><img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&amp;logoColor=white" alt="Vite 8" /></a>
+  <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express-5-000000?logo=express&amp;logoColor=white" alt="Express 5" /></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="https://img.shields.io/badge/CSS-3-1572B6?logo=css&amp;logoColor=white" alt="CSS 3" /></a>
+</p>
+
 # Nathaniel Ponce Portfolio
 
 Source and production runbook for [nateponds.com](https://nateponds.com). The site is a React 19/Vite portfolio with two HTML entry points, a small Express API for live project-status badges, and an automated deployment to Apache on a self-hosted Ubuntu runner.
@@ -340,4 +357,3 @@ For rollback, redeploy a known-good commit (preferably by reverting the bad comm
 - Back up Apache, systemd, Cloudflare/DNS settings, and the repository—not `node_modules` or `dist`, which are reproducible.
 - Monitor disk space, mount health, API restarts, certificate validity, and public health checks.
 - Never commit `.env`, certificates, private keys, API tokens, or runner credentials.
-
