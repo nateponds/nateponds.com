@@ -265,13 +265,13 @@ function Hero() {
             Projects
           </a>
           <a
-            href="https://github.com/nateponds"
+            href="https://github.com/nateponds/nateponds.com"
             className="hero-btn btn-secondary"
             target="_blank"
             rel="noreferrer"
           >
             <GitHubIcon size={14} />
-            GitHub
+            View my code on GitHub
           </a>
           <a href="#contact" className="hero-btn btn-secondary">
             <MailIcon size={14} />
