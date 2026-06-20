@@ -1,8 +1,12 @@
+<div align="center">
+
 ![Nathaniel Ponce portfolio logo](./assets/images/logo.png)
 
-[Live Site](https://nateponds.com) • [Projects](https://nateponds.com/projects.html) • [GitHub](https://github.com/nateponds) • [Email](mailto:nathanielryanponce@gmail.com)
+[Live Site](https://nateponds.com) | [Projects](https://nateponds.com/projects.html) | [GitHub](https://github.com/nateponds) | [Email](mailto:nathanielryanponce@gmail.com)
 
 ![Deployment status](https://github.com/nateponds/nateponds.com/actions/workflows/deploy.yml/badge.svg)![Website status](https://img.shields.io/website?url=https%3A%2F%2Fnateponds.com&label=nateponds.com)![Node.js 20 or newer](https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white)![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)![Vite 8](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)![Express 5](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)![CSS 3](https://img.shields.io/badge/CSS-3-1572B6?logo=css&logoColor=white)
+
+</div>
 
 # Nathaniel Ponce Portfolio
 
