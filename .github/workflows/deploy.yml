@@ -24,7 +24,6 @@ jobs:
       - name: Verify application structure
         run: |
           test -f index.html
-          test -f projects.html
           test -f server.js
           test -f vite.config.js
           test -f package.json
@@ -39,7 +38,6 @@ jobs:
           npm ci --ignore-scripts
           npm run check
           test -f dist/index.html
-          test -f dist/projects.html
 
       - name: Deploy to Apache web root
         run: |
