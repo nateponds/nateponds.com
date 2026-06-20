@@ -46,10 +46,9 @@ function useProjects() {
   return projects;
 }
 
-function Navigation({ archive = false }) {
+function Navigation({ archive = false, onBack }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const prefix = archive ? "./index.html" : "";
   useEffect(() => {
     const onScroll = () =>
       setScrolled(window.scrollY > Math.max(120, window.innerHeight * 0.65));
@@ -69,8 +68,9 @@ function Navigation({ archive = false }) {
     >
       <a
         id="site-logo"
-        href={`${prefix}#hero`}
+        href="#hero"
         aria-label="Nathaniel Ponce Home"
+        onClick={archive ? (e) => { e.preventDefault(); onBack?.(); } : undefined}
       >
         <img src={logo} alt="Nathaniel Ponce Logo" />
       </a>
@@ -98,8 +98,8 @@ function Navigation({ archive = false }) {
             <li key={id}>
               <a
                 className="nav-button"
-                href={`${prefix}#${id}`}
-                onClick={() => setOpen(false)}
+                href={`#${id}`}
+                onClick={archive ? (e) => { e.preventDefault(); onBack?.(); setOpen(false); } : () => setOpen(false)}
               >
                 {label}
               </a>
@@ -623,7 +623,7 @@ function ProjectCard({ project }) {
   );
 }
 
-function Projects({ projects, archive = false }) {
+function Projects({ projects, archive = false, onViewMore, onBack }) {
   const visible = archive
     ? projects
     : projects.filter((project) => project.featured).slice(0, 4);
@@ -638,9 +638,9 @@ function Projects({ projects, archive = false }) {
           {archive ? (
             <>
               <div className="projects-heading-topline">
-                <a className="projects-back-link" href="./index.html#projects">
+                <button className="projects-back-link" onClick={onBack}>
                   ← Go Back
-                </a>
+                </button>
                 <p className="section-kicker">Portfolio Archive</p>
               </div>
               <h1 id="projects-title">All Projects</h1>
@@ -663,12 +663,12 @@ function Projects({ projects, archive = false }) {
         {!archive && (
           <Reveal className="projects-actions" delay={160}>
             {projects.length > 4 ? (
-              <a
-                href="./projects.html"
+              <button
                 className="project-link projects-more-link"
+                onClick={onViewMore}
               >
                 View More Projects
-              </a>
+              </button>
             ) : (
               <span className="project-link projects-more-link project-link-disabled">
                 More Projects Coming Soon
@@ -771,18 +771,20 @@ function Contact() {
 }
 
 export default function App() {
-  const archive = document.documentElement.dataset.page === "projects";
+  const [archive, setArchive] = useState(false);
   const projects = useProjects();
   useEffect(() => {
     document.body.className = archive ? "projects-page" : "";
     if (!archive) import("../js/webgl.js");
   }, [archive]);
+  const showArchive = () => { setArchive(true); window.scrollTo(0, 0); };
+  const hideArchive = () => { setArchive(false); setTimeout(() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }), 50); };
   if (archive)
     return (
       <>
-        <Navigation archive />
+        <Navigation archive onBack={hideArchive} />
         <main>
-          <Projects projects={projects} archive />
+          <Projects projects={projects} archive onBack={hideArchive} />
         </main>
       </>
     );
@@ -793,7 +795,7 @@ export default function App() {
       <Hero />
       <main>
         <About />
-        <Projects projects={projects} />
+        <Projects projects={projects} onViewMore={showArchive} />
       </main>
       <Contact />
     </>

@@ -1,23 +1,8 @@
-<p align="center">
-  <img src="./assets/images/logo.png" alt="Nathaniel Ponce portfolio logo" width="140" />
-</p>
+![Nathaniel Ponce portfolio logo](./assets/images/logo.png)
 
-<p align="center">
-  <a href="https://nateponds.com">Live Site</a> &bull;
-  <a href="https://nateponds.com/projects.html">Projects</a> &bull;
-  <a href="https://github.com/nateponds">GitHub</a> &bull;
-  <a href="mailto:nathanielryanponce@gmail.com">Email</a>
-</p>
+[Live Site](https://nateponds.com) • [Projects](https://nateponds.com/projects.html) • [GitHub](https://github.com/nateponds) • [Email](mailto:nathanielryanponce@gmail.com)
 
-<p align="center">
-  <a href="https://github.com/nateponds/nateponds.com/actions/workflows/deploy.yml"><img src="https://github.com/nateponds/nateponds.com/actions/workflows/deploy.yml/badge.svg" alt="Deployment status" /></a>
-  <a href="https://nateponds.com"><img src="https://img.shields.io/website?url=https%3A%2F%2Fnateponds.com&amp;label=nateponds.com" alt="Website status" /></a>
-  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&amp;logoColor=white" alt="Node.js 20 or newer" /></a>
-  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&amp;logoColor=black" alt="React 19" /></a>
-  <a href="https://vite.dev/"><img src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&amp;logoColor=white" alt="Vite 8" /></a>
-  <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express-5-000000?logo=express&amp;logoColor=white" alt="Express 5" /></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="https://img.shields.io/badge/CSS-3-1572B6?logo=css&amp;logoColor=white" alt="CSS 3" /></a>
-</p>
+![Deployment status](https://github.com/nateponds/nateponds.com/actions/workflows/deploy.yml/badge.svg)![Website status](https://img.shields.io/website?url=https%3A%2F%2Fnateponds.com&label=nateponds.com)![Node.js 20 or newer](https://img.shields.io/badge/Node.js-20%2B-339933?logo=nodedotjs&logoColor=white)![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)![Vite 8](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)![Express 5](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)![CSS 3](https://img.shields.io/badge/CSS-3-1572B6?logo=css&logoColor=white)
 
 # Nathaniel Ponce Portfolio
 
@@ -89,14 +74,14 @@ Vite prints the frontend URL, normally `http://localhost:5173`. Its `/api` proxy
 
 Useful commands:
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start Vite with hot reload |
-| `npm run api` | Start Express on `127.0.0.1:3001` |
-| `npm test` | Run backend health-check unit tests |
-| `npm run build` | Create the production frontend in `dist/` |
-| `npm run check` | Run tests, then a production build |
-| `npm run preview` | Preview the Vite build locally |
+| Command                           | Purpose                                               |
+| --------------------------------- | ----------------------------------------------------- |
+| `npm run dev`                     | Start Vite with hot reload                            |
+| `npm run api`                     | Start Express on `127.0.0.1:3001`                     |
+| `npm test`                        | Run backend health-check unit tests                   |
+| `npm run build`                   | Create the production frontend in `dist/`             |
+| `npm run check`                   | Run tests, then a production build                    |
+| `npm run preview`                 | Preview the Vite build locally                        |
 | `npm run update-project-statuses` | Check live project URLs and rewrite fallback statuses |
 
 Run `npm run check` before pushing. On Windows PowerShell systems that block `npm.ps1`, use `npm.cmd run check`.
@@ -125,12 +110,12 @@ Image keys must be imported and mapped in `src/data.js`; put image files in `ass
 
 Statuses are:
 
-| Value | Meaning |
-| --- | --- |
-| `blue` | Planned; no live URL |
-| `green` | HTTP(S) URL returned a valid website |
+| Value    | Meaning                                                                                      |
+| -------- | -------------------------------------------------------------------------------------------- |
+| `blue`   | Planned; no live URL                                                                         |
+| `green`  | HTTP(S) URL returned a valid website                                                         |
 | `yellow` | Reachable but returned an HTTP error, placeholder, maintenance page, or non-website response |
-| `red` | Invalid URL, timeout, DNS error, or connection failure |
+| `red`    | Invalid URL, timeout, DNS error, or connection failure                                       |
 
 The updater performs network requests and changes `data/projects.json`; review its diff before committing.
 
@@ -162,12 +147,12 @@ Both pages mount the same React application. `data-page="projects"` on `projects
 
 Environment variables:
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `HOST` | `127.0.0.1` | Express bind address; keep loopback in production |
-| `PORT` | `3001` | Express port |
-| `PROJECT_STATUS_TIMEOUT_MS` | `5000` | Timeout per project check |
-| `PROJECT_STATUS_CACHE_TTL_MS` | `300000` | API result cache lifetime |
+| Variable                      | Default     | Purpose                                           |
+| ----------------------------- | ----------- | ------------------------------------------------- |
+| `HOST`                        | `127.0.0.1` | Express bind address; keep loopback in production |
+| `PORT`                        | `3001`      | Express port                                      |
+| `PROJECT_STATUS_TIMEOUT_MS`   | `5000`      | Timeout per project check                         |
+| `PROJECT_STATUS_CACHE_TTL_MS` | `300000`    | API result cache lifetime                         |
 
 ## First production setup for nateponds.com
 
@@ -304,9 +289,9 @@ The workflow deploys every push to `main` on the self-hosted Linux runner. It:
 
 Add these repository Actions secrets:
 
-| Secret | Required permission |
-| --- | --- |
-| `CLOUDFLARE_ZONE_ID` | The zone ID for nateponds.com |
+| Secret                 | Required permission                                           |
+| ---------------------- | ------------------------------------------------------------- |
+| `CLOUDFLARE_ZONE_ID`   | The zone ID for nateponds.com                                 |
 | `CLOUDFLARE_API_TOKEN` | Token limited to **Zone → Cache Purge → Purge** for this zone |
 
 Protect `main` and require the deploy/check workflow if production changes should be reviewed before release. The self-hosted runner has production access; restrict who can modify workflows and who can push to deployment branches.
@@ -327,15 +312,15 @@ Also open the landing page and project archive in a browser, check mobile naviga
 
 ## Operations and troubleshooting
 
-| Symptom | Checks |
-| --- | --- |
-| Apache returns 503 for `/api/` | `systemctl status` and `journalctl -u nateponds-portfolio-api.service -n 100` |
-| Site returns 403 | Directory execute/read permissions, mount state, and Apache `<Directory>` path |
-| Old frontend remains visible | Confirm workflow revision, inspect `dist/`, then check Cloudflare cache purge result |
-| Statuses remain static | Test both health endpoints and inspect browser Network requests to `/api/project-statuses` |
-| Apache will not reload | Run `sudo apache2ctl configtest` and inspect `nateponds-error.log` |
-| Deploy cannot restart API | Verify the exact systemd unit name and the narrow sudoers rule |
-| Runner is offline | Check the GitHub runner service and host network/storage mount |
+| Symptom                        | Checks                                                                                     |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| Apache returns 503 for `/api/` | `systemctl status` and `journalctl -u nateponds-portfolio-api.service -n 100`              |
+| Site returns 403               | Directory execute/read permissions, mount state, and Apache `<Directory>` path             |
+| Old frontend remains visible   | Confirm workflow revision, inspect `dist/`, then check Cloudflare cache purge result       |
+| Statuses remain static         | Test both health endpoints and inspect browser Network requests to `/api/project-statuses` |
+| Apache will not reload         | Run `sudo apache2ctl configtest` and inspect `nateponds-error.log`                         |
+| Deploy cannot restart API      | Verify the exact systemd unit name and the narrow sudoers rule                             |
+| Runner is offline              | Check the GitHub runner service and host network/storage mount                             |
 
 Logs:
 
